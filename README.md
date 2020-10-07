@@ -2,7 +2,7 @@
 This is a url shortner webiste created using Python-Django.
 
 # Contributors
-> Siddesh
-> Rohit Kumar Saini
-> Lokesh 
+> Siddesh<br>
+> Rohit Kumar Saini<br>
+> Lokesh <br>
 > Anand
