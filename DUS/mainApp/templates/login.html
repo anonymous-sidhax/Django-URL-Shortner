@@ -16,35 +16,30 @@
         <a href="#"><li><b>Why DUS?</b></li></a>
         <a href="#"><li>Features</li></a>
         <a href="#"><li>About</li></a>
-        <a href="{% url 'Login' %}"><li>Login</li></a>
-        <a href="{% url 'Sign Up' %}"><li>Signup</li></a>
+        <a href="#"><li>Login</li></a>
+        <a href="#"><li>Signup</li></a>
         </ul>
     </nav>
     <!-- Navigation Bar End  -->
 
-    <!-- Header Start -->
-    <header>
-        <h2>DUS is a shortening and link management platform to brand, track and share short URLs using a custom path.</figcaption>
-        </h1>
-    </header>
-    <!-- Header End -->
-
-    <div style="text-align: center; height: 250px; background-color:#1A1A1A;">
-        <div style="top: 70px; position: relative; text-align: center; width: 60%; display: inline-table">
-            <div style="display: table-cell; border-bottom: 10px;">
-                <form action="short" method="GET">
-                    <input class="textbox" type="text" class="form-control" name="org_url" value="" placeholder="Paste your lengthy url to shorten it" required="">
-                    <button class="button">Shorten</button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
-    <div style="height: 400px; background-color: white;">
-    </div>
-
   
+    <form action="{% url 'Login' %}" method="POST">
+
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" autocomplete="off" placeholder="Email" id="">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" id="">
+        </div>
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <div class="form-group">
+            <input type="submit" class="btn btn-outline-success px-4" value="Login">
+        </div>
+        <a class="card-link" href="{% url 'Sign Up' %}">New Here ? Signup</a>
+    </form>
+
+
+
 
     <!-- Footer Start-->
     <footer class="footer">

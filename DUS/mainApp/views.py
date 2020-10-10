@@ -4,8 +4,16 @@ from .models import Keys, Shorten_Urls
 # USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
 def home(request):
-
     return render(request, "index.html")
+
+def signup(request):
+    return render(request, "signup.html")
+
+def login(request):
+    return render(request, "login.html")
+
+def logout(request):
+    return render(request, "logout.html")
 
 def shorten(request):
     url = "http://127.0.0.1:8000/"
