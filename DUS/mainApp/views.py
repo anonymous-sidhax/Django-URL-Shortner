@@ -5,7 +5,7 @@ from .models import Keys, Shorten_Urls
 
 def home(request):
 
-    return render(request, "index_siddesh.html")
+    return render(request, "index.html")
 
 def shorten(request):
     url = "http://127.0.0.1:8000/"
