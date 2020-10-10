@@ -1,0 +1,9 @@
+7th October 2020
+  - Initial Django Build (Rohit)
+  
+9th October 2020
+  - Basic Homepage Created (Rohit)
+  
+10th October 2020
+  - ToDo.txt (Siddesh)
+  - Changelog.txt (Siddesh)
