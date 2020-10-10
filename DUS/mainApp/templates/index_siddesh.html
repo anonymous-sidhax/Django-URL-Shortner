@@ -1,5 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} Django-URL-Shortner {% endblock title %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'assets/css/mainStyles.css' %}" media="screen"/>   
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/mainStyles.css' %}" media="screen">
 
 <!-- Navigation Bar Start-->
 <nav class="navbar">
@@ -12,16 +16,15 @@
       <a href="#"><li>Signup</li></a>
     </ul>
 </nav>
-<!-- Navigation Bar End      <div class="navbar_ham"></div>-->
+<!-- Navigation Bar End -->
 
-
-<div class= "form"> 
-    <form>
-        <label for="link">Link to Shorten:</label>
-        <input type="text" id="link_to_shorten" name="link_to_shorten"><br><br>
-        <input type="submit" value="Shorten">
+<div style="margin-top: 20%">
+    <form action="short" method="get">
+        <input type="text" name="org_url" placeholder="Enter url here">
+        <button type="submit">Shorten</button>
     </form>
 </div>
+
 
 <!-- Footer Start-->
 <footer class="footer">
@@ -29,9 +32,6 @@
         <img class="logo"
              src="https://svgshare.com/i/Q22.svg" class="navbar_logo"/>
     </a>
-    <div class="footer_rights">
-        <b>DUS 2020 &copy; </b>
-        &nbsp🔥
-    </div>
 </footer>
 <!-- Footer End-->
+{% endblock body %}

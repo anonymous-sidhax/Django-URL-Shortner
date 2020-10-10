@@ -22,4 +22,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="Homepage"),
+    path('short', views.shorten, name="Shorten Url"),
+    path('<str:url>', views.redirection, name="Redirection To Original Page"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
