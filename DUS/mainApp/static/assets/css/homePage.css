@@ -81,10 +81,14 @@ body {
 
 
 
+.hover_effect {
+    z-index: 1;   
+}
 
 .hover_effect ul {
     list-style-type: none;
     padding: 0;
+
 }
 
 .hover_effect ul li {
