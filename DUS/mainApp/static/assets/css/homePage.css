@@ -36,10 +36,19 @@ hr {
     margin-bottom: 30px;
 }
 
-.textbox {
+.textbox_url {
     border-radius: 6px;
     height: 50px;
     width: 100%;
+    vertical-align: middle; 
+    font-family: Nunito;
+    text-align: center;
+}
+
+.textbox_custom {
+    border-radius: 6px;
+    height: 50px;
+    width: 50%;
     vertical-align: middle; 
     font-family: Nunito;
     text-align: center;

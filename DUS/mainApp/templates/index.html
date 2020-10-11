@@ -1,11 +1,12 @@
-<!--{% block title %} Django-URL-Shortner {% endblock title %}-->
+<head>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'assets/css/mainStyles.css' %}" media="screen"/>   
 <link rel="stylesheet" type="text/css" href="{% static 'assets/css/homePage.css' %}" media="screen"/>   
 
+</head>
+
+
 {% block body %}
-
-
 
 <body class="homepage_body" >
         
@@ -31,13 +32,15 @@
     </header>
     <!-- Header End -->
 
-    <div style="align-items: center; text-align: center; height: 47%; background-color:1A1A1A;">
+    <div style="align-items: center; text-align: center; height: 60%; background-color:1A1A1A;">
         <div style="top: 30px; position: relative; text-align: center; width: 60%; display: inline-table">
             <div class="shorten_link_text">
                 <b>Shorten your links with just a single mouse click !</b>
                 <hr></hr>
-                <form action="short" method="GET" id="form">
-                    <input class="textbox" type="text" class="form-control" name="original_url" value="" placeholder="  Paste your lengthy url to shorten it" required="">
+                <form action="short" method="POST" id="form">
+                    {% csrf_token  %}
+                    <input class="textbox_url" type="text" class="form-control" name="original_url" value="" placeholder="  Paste your lengthy url to shorten it" required="">
+                    <input class="textbox_custom" type="text" class="form-control" name="custom_url" value="" placeholder="  Custom URL">
                     <div id="clickDiv" class="hover_effect">
                         <ul>
                           <li>
