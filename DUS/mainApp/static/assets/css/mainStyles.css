@@ -24,7 +24,6 @@
   position: absolute;
   left: 50px;
   width: 50px;
-  
   top: 50%;
   transform: translateY(-50%);
 }
@@ -46,16 +45,16 @@
 }
 
 .navbar_links a li{
-    display: flex;
-    align-items: center;
-    height: 70px;
-    padding: 0 40px;
-    transition: 0.2s linear;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  padding: 0 40px;
+  transition: 0.2s linear;
 }
 
 .navbar_links a li:hover{
-    background-color: #ffffff;
-    color: black;
+  background-color: #ffffff;
+  color: black;
 }
 
 .navbarham{

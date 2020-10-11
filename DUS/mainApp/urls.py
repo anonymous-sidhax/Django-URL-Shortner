@@ -25,5 +25,6 @@ urlpatterns = [
     path('signup/', views.signup, name="Sign Up"),
     path('login/', views.login, name="Login"),
     path('logout/', views.logout, name="Logout"),
+    path('short', views.shorten, name="Shorten Url"),
     path('<str:url>', views.redirection, name="Redirection To Original Page"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
