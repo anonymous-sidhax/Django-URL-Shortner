@@ -5,4 +5,4 @@ This is a url shortner website created using Python-Django.
 - Siddesh
 - Rohit Kumar Saini
 - Lokesh
-- Anand
+- Ayush
