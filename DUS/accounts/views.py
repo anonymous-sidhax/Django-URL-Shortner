@@ -17,6 +17,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = User.objects.create_user(username=username, email=email, password=password)
             return redirect('accounts:login')
+    
     return render(request, "registration/signup.html", {'form':form})
 
 
@@ -25,7 +26,6 @@ def logout_view(request):
     logout(request)
     messages.info(request, "Logout successfully")
     return redirect('Homepage')
-
 
 def login_view(request):
     if not request.user.is_authenticated: # If you are logged in then it will stop logging in again

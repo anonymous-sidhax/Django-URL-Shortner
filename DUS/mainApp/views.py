@@ -1,10 +1,12 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Keys, Shorten_Urls
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import UserRegistrationForm, LoginForm
+import accounts.urls
 import random
 import string
 
@@ -14,6 +16,9 @@ USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX
 def home(request):
     return render(request, "index.html")
 
+@login_required(login_url='/accounts/login/')
+def dashboard(request):
+    return render(request, "dashboard.html")
 
 # def shortenn(request):
 #     url = "http://127.0.0.1:8000/"
