@@ -12,14 +12,14 @@ class LoginForm(AuthenticationForm):
 
 
 
-        def clean_username(self):
-            username = self.cleaned_data.get('username')
-            password = self.cleaned_data.get('password')
+        # def clean_username(self):
+        #     username = self.cleaned_data.get('username')
+        #     password = self.cleaned_data.get('password')
             
-            if not User.objects.filter(username=username).exists():
-                raise ValidationError('Please enter a correct username and password. Note that both fields may be case-sensitive')
-            else:
-                return username, password
+        #     if not User.objects.filter(username=username).exists():
+        #         raise ValidationError('Please enter a correct username and password. Note that both fields may be case-sensitive')
+        #     else:
+        #         return username, password
 
 
 
