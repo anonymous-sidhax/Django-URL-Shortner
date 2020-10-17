@@ -50,6 +50,7 @@
                                 {{form.errors.password}}
                             </p>
                             </div>
+                            <input type = "hidden" name = "next" value = {{ request.GET.next }}/>
                             <div class="field">
                                 <div class="control"><button class="button input" type="submit">Login</button></div>
                             </div>                     
