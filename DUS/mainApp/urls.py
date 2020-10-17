@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from . import views
+from django.contrib.auth import views 
+from .views import home # Wrote like this so that every one can understand what are imported
+
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name="Homepage"),
-    path('signup/', views.signup, name="Sign Up"),
-    path('login/', views.login, name="Login"),
-    path('logout/', views.logout, name="Logout"),
-    path('short', views.shorten, name="Shorten Url"),
-    path('<str:url>', views.redirection, name="Redirection To Original Page"),
+    # path('admin/', admin.site.urls),   Giving warning
+    path('', home, name="Homepage"),
+    # path('short', shorten, name="Shorten Url"),
+    # path('<str:url>', redirection, name="Redirection To Original Page"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
