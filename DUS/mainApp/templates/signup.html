@@ -1,15 +1,24 @@
 <!--{% block title %} Django-URL-Shortner {% endblock title %}-->
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'assets/css/mainStyles.css' %}" media="screen"/>   
-<link rel="stylesheet" type="text/css" href="{% static 'assets/css/homePage.css' %}" media="screen"/>   
-
+{% load widget_tweaks %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 {% block body %}
 
+<style>
+    body{
+        background-color: #fff;
+    }
+    .field:not(:last-child) {
+    margin-bottom: 1.6rem;
+    }
+    
+</style>
 
 
-<body class="homepage_body" >
+<body>
         
-    <!-- Navigation Bar Start-->
+    {% comment %} 
+            <!-- Navigation Bar Start-->
     <nav class="navbar">
         <a href="{% url 'Homepage' %}"> <img src="https://svgshare.com/i/Q22.svg" class="navbar_logo"/> </a>
         <ul class="navbar_links">
@@ -22,34 +31,85 @@
     </nav>
     <!-- Navigation Bar End  -->
 
+    {% endcomment %}
 
     {% if error %}
         {{ error }}
         <button type="button" data-dismiss="alert" area-label="Close"></button>
 
     {% endif %}
+    <section class="section">
+        <div class="container">
+            <div class="columns  is-centered is-gapless">
+                <div class="column is-half is-hidden-mobile">
+                    <div class="card ">
+                      <div class="card-image" style="background-image: url({% static 'assets/img/3418100.jpg' %});width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+                <div class="column is-two-fifths">
+                    <div class="card">
+                        <div class="card-content has-text-centered">
+                            <h3 class="is-size-3 " style="letter-spacing: 4px;">REGISTER</h3>
+                            <p class="subtitle is-size-6" style="word-spacing: 1px;letter-spacing: 0.5px;">IT'S COMPLETELY FREE</p>
+                        </div>
+                        <div class="card-content">
+                            <form action="" method="POST" novalidate>
+                                {% csrf_token  %}
+                        
+                                <div class="field">
+                                    <label class="label" style="font-weight: 500;">Username</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        {% render_field form.username class="input" placeholder="Username" type="text" %}
+                                      <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                      </span>
+                                    </div>
+                                </div>
+                                {% comment %}
+                                <div class="field">
+                                    <label class="label" style="font-weight: 500;">Email</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        {% render_field form.email class="input" placeholder="Email Address" type="email" %}
+                                      <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                      </span>
+                                </div>
+                                </div>
+                                {% endcomment %}
+                                <div class="field">
+                                    <label class="label" style="font-weight: 500;">Password</label>
+                                    <div class="control">
+                                        {% render_field form.password1 class="input" placeholder="Password"  %}
+                                      <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                      </span>
+                                </div>
+                                </div>
 
-    <form action="" method="POST">
-        {% csrf_token  %}
-        <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username" id="">
+                                <div class="field">
+                                    <label class="label" style="font-weight: 500;">Confirm Password</label>
+                                    <div class="control">
+                                        {% render_field form.password2 class="input" placeholder="Confirm Password"  %}
+                                      <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                      </span>
+                                </div>
+                                </div>
+                                <div class="field">
+                                    <button class="button input">Sign up</button>
+                                </div>
+                                <p>Already Registered ?<a class="card-link" href="{% url 'Login' %}">Login</a></p>                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <input type="email" class="form-control" name="email" autocomplete="off" placeholder="Email" id="">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" id="">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" name="password2" placeholder="Confirm Password" id="">
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-outline-success px-4" value="Signup">
-        </div>
-        <a class="card-link" href="{% url 'Login' %}">Already Registered ? Login</a>
-    </form>
+    </section>
+    
 
-
+{% comment %}
+    
     <!-- Footer Start-->
     <footer class="footer">
         <a target="_blank" >
@@ -62,6 +122,7 @@
         </div>
     </footer>
     <!-- Footer End-->
+{% endcomment %}
 
 </body>
 {% endblock body %}

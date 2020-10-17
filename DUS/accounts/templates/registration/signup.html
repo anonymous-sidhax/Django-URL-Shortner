@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body %}
+
+<style>
+    .errorlist{
+        color: #f14668;
+    }
+</style>
+
+<section class="section">
+    <div class="container">
+        <div class="columns  is-centered is-gapless">
+            <div class="column is-half is-hidden-mobile">
+                <div class="card " style="height: 100%; width: 100%;">
+                  <div class="card-image" style="background-image: url({% static 'assets/img/3418100.jpg' %});width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="column is-two-fifths">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <h3 class="is-size-3 " style="letter-spacing: 4px;">REGISTER</h3>
+                        <p class="subtitle is-size-6" style="word-spacing: 1px;letter-spacing: 0.5px;">IT'S COMPLETELY FREE</p>
+                    </div>
+                    <div class="card-content">
+                        <form action="{% url 'accounts:signup' %}" method="POST" novalidate>
+                            {% csrf_token  %}
+                    
+                            <div class="field">
+                                <label class="label" style="font-weight: 500;">Username</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    {% render_field form.username class="input" placeholder="Username" type="text" %}
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                  </span>
+                                </div>
+                                {% if form.username.errors %} <p class="help is-danger">{{ form.username.errors }}</p> {% endif %}
+                            </div>
+                            
+                            <div class="field">
+                                <label class="label" style="font-weight: 500;">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    {% render_field form.email class="input" placeholder="Email Address" type="email" %}
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                  </span>
+                            </div>
+                            {% if form.email.errors %} <p class="help is-danger">{{ form.email.errors }}</p> {% endif %}
+                            </div>
+                            
+                            <div class="field">
+                                <label class="label" style="font-weight: 500;">Password</label>
+                                <div class="control">
+                                    {% render_field form.password1 class="input" placeholder="Password"  %}
+                    
+                            </div>
+                            {% if form.password1.errors %} <p class="help is-danger">{{ form.password1.errors }}</p> {% endif %}
+                            </div>
+
+                            <div class="field">
+                                <label class="label" style="font-weight: 500;">Confirm Password</label>
+                                <div class="control">
+                                    {% render_field form.password2 class="input" placeholder="Confirm Password"  %}
+                            </div>
+                            {% if form.password2.errors %} <p class="help is-danger">{{ form.password2.errors }}</p> {% endif %}
+                            </div>
+                            <div class="field">
+                                <button class="button input">Sign up</button>
+                            </div>
+                            <p>Already Registered ?<a class="card-link" href="">Login</a></p>                                
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock body %}
