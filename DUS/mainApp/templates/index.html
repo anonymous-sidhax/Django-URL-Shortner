@@ -1,6 +1,99 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
 
+
+
+<style>
+    .is-red{
+        background-color: #ff3b3b;
+        opacity: 0.9;
+        color: #f4f4f4;
+    }
+    .is-red:hover{
+        background-color: #ff3b3b;
+        opacity: 1;
+        color: #f4f4f4;
+    }
+    .is-red-{
+        background-color: #ff3b3b;
+        opacity: 0.9;
+        color: #f4f4f4;
+    }
+    .is-red-:hover{
+        background-color: #ff3b3b;
+        opacity: 1;
+        color: #f4f4f4;
+    }
+    @media screen and (max-width: 768px){
+        div.columns.is-variable.is-centered#container-{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column-reverse;
+            }
+        
+        .button.is-red{
+            font-size: 1rem;
+        }
+        }
+
+ 
+    
+</style>
+
+
+<section class="section">
+    <div class="conatiner">
+        <div class="columns is-variable is-centered" id="container-">
+            <div class="column is-7">
+                <div class="card" style="box-shadow:none;">
+                    <div class="card-content">
+                        <h2 class="is-size-1 is-size-3-tablet is-size-3-mobile" style="font-weight: 550;">Short Your Long Url</h2>
+                        <p class="is-size-5 mt-4 is-size-6-tablet is-size-6-mobile" style="color: #666666;">DUS is a shortening and link management platform to brand, track and share short URLs using a custom path.</p>
+                        <div class="fields mt-6"><button class="button is-red is-normal-mobile is-medium is-normal-mobile is-normal-tablet ">Get Started</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-two-fifths is-three-quarters-mobile" >
+                <div class="card" style="box-shadow:none;">
+                    <div class="card-image"><img src="{% static 'assets/img/undrawimg.svg' %}" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section" style="background-color: #f4f4f4;">
+    <form action="" method="POST" id="form">
+        {% csrf_token  %}
+        <div class="conatiner">
+            <div class="columns is-variable is-centered">
+                <div class="column is-one-thirds">
+                    <div class="fields">
+                        <input type="text" class="input is-medium" name="original_url" type="url">
+                    </div>
+                </div>
+                <div class="column is-one-fifth">
+                    <div class="buttons" style="justify-content: center;"><button type="submit" class="button is-medium input is-red-" >Shorten</button></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
     <!-- Header Start -->
     <header>
         <div style="text-align: center; padding-left: 200px; padding-right: 200px; position: relative;">
@@ -9,35 +102,27 @@
     </div>
     </header>
     <!-- Header End -->
-
-    <div style="align-items: center; text-align: center; height: 60%; background-color:1A1A1A;">
-        <div style="top: 30px; position: relative; text-align: center; width: 60%; display: inline-table">
-            <div class="shorten_link_text">
-                <b>Shorten your links with just a single mouse click !</b>
-                <hr></hr>
-                <form action="short" method="POST" id="form">
-                    {% csrf_token  %}
-                    <input class="textbox_url" type="text" class="form-control" name="original_url" value="" placeholder="  Paste your lengthy url to shorten it" required="">
-                    <input class="textbox_custom" type="text" class="form-control" name="custom_url" value="" placeholder="  Custom URL">
-                    <div id="clickDiv" class="hover_effect">
-                        <ul>
-                          <li>
-                            SHORTEN
-                            <span></span><span></span><span></span><span></span>
-                          </li>
-                        </ul>
-                    </div>
-                    <script>
-                    document.getElementById("clickDiv").onclick = function() {
-                        document.getElementById("form").submit();
-                      };
-                    </script>
-                </form>
-            </div>
+<div style="align-items: center; text-align: center; height: 60%; background-color:1A1A1A;">
+    <div style="top: 30px; position: relative; text-align: center; width: 60%; display: inline-table">
+        <div class="shorten_link_text">
+            <b>Shorten your links with just a single mouse click !</b>
+            <hr></hr>
+            <form action="short" method="POST" id="form">
+                {% csrf_token  %}
+                <div class="field">
+                    <input class="textbox_url" type="text" class="input" name="original_url" value="" placeholder="  Paste your lengthy url to shorten it" required="">
+                </div>
+                <div class="field">
+                    <input class="textbox_custom" type="text" class="input" name="custom_url" value="" placeholder="  Custom URL">
+                </div>
+                
+            </form>
         </div>
-
     </div>
+<!-- Char 5 -->
+</div>
 
+{% endcomment %}
 
     
 {% endblock body %}

@@ -1,14 +1,12 @@
-from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views 
 from .views import home, redirection, shorten, dashboard
-import accounts
+# import accounts Why this import 
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', home, name="Homepage"),
     path('short', shorten, name="Shorten Url"),
     path('<str:url>', redirection, name="Redirection To Original Page"),

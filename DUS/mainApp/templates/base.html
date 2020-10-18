@@ -128,6 +128,14 @@
       <span class="text-muted">DUS &copy; 2020</span>
     </div>
 </footer>
+<script>
+  const message = document.querySelector('.message');
+  const delete_button = document.querySelector('.delete');
 
+  delete_button.addEventListener('click', ()=> {
+    message.classList.add('is-hidden');
+  })
+
+</script>
 </body>
 </html>
