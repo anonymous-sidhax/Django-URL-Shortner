@@ -25,8 +25,7 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "Logout successful")
-    n = request.META['HTTP_REFERER']
-    return HttpResponseRedirect(n)
+    return redirect('Homepage')
 
 def login_view(request):
     if not request.user.is_authenticated: # If you are logged in then it will stop logging in again
@@ -38,10 +37,16 @@ def login_view(request):
                 password = form.cleaned_data.get('password')
                 user = authenticate(username= username, password=password)
                 if user is not None:
-                    login(request,user)
-                    messages.success(request, f"Logged in successfully as {username}")
-                    return redirect('Homepage')
+                    login(request, user)
+                    redirection_url = request.POST.get('next')
+                    if redirection_url:
+                        print (redirection_url)
+                        return HttpResponseRedirect(redirection_url)
+                    else:
+                        messages.success(request, f"Logged in successfully as {username}")
+                        return redirect('Homepage')
                 else:
+                    messages.error(request, "User Doesn't Exists.")
                     return render(request, "registration/login.html", {'form':form})
         else:
             form = AuthenticationForm()
