@@ -7,3 +7,20 @@
 10th October 2020
   - ToDo.txt (Siddesh)
   - Changelog.txt (Siddesh)
+
+16th October 2020
+  - Fixed Console Warning (Siddesh)
+  - Added Visit Count (Siddesh)
+
+17th October 2020
+  - Homepage and UI Changes (Aayush)
+  - Added Authentication (Aayush)
+  - Dashboard Redirect and Dashboard Validation - If user logged In (Siddesh)
+  - Adding unique constraint for shorten url field (Siddesh)
+
+18th October 2020
+  - UI Changes and block to show Shorten URL (Rohit)
+  - Fixed Double Slash Issue (Siddesh)
+  
+19th October 2020
+  - 
