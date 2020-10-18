@@ -2,3 +2,7 @@
 # You need to install these with:
 # `pip install -r requirements.txt` before you can run.
 
+django
+gunicorn
+django-heroku
+django-widget-tweaks
