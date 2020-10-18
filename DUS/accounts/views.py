@@ -24,7 +24,7 @@ def signup_view(request):
 
 def logout_view(request):
     logout(request)
-    messages.info(request, "Logout successfully")
+    messages.info(request, "Logout successful")
     return redirect('Homepage')
 
 def login_view(request):
@@ -38,13 +38,14 @@ def login_view(request):
                 user = authenticate(username= username, password=password)
                 if user is not None:
                     login(request,user)
-                    messages.success(request, f"Logged in successfully as {username}")
-                    return redirect('Homepage')
+                    if request.POST['next'] != '':
+                        return redirect(request.POST['next'][:-1])  # Any better work around than trimming the last slash?
+                    else:
+                        messages.success(request, f"Logged in successfully as {username}")
+                        return redirect('Homepage')
                 else:
                     messages.error(request, "User Does'nt Exists.")
                     return render(request, "registration/login.html", {'form':form})
-            
-
         else:
             form = AuthenticationForm()
         return render(request, "registration/login.html", {'form':form})
