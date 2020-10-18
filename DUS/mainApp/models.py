@@ -11,7 +11,7 @@ class Keys(models.Model):
 class Shorten_Urls(models.Model):
     id = models.AutoField(primary_key=True)
     original_url = models.CharField(blank=False, max_length=200)
-    short_url = models.CharField(blank=False, max_length=10)
+    short_url = models.CharField(blank=False, max_length=10, unique=True)
     visits = models.IntegerField(default=0)
 
     def __str__(self):
