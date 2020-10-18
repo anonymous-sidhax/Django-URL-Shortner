@@ -8,7 +8,6 @@ import accounts
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', home, name="Homepage"),
     path('short', shorten, name="Shorten Url"),
     path('<str:url>', redirection, name="Redirection To Original Page"),
