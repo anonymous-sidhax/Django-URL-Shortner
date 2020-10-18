@@ -43,7 +43,6 @@ def redirection(request, url):
 
 def shorten(request):
     if request.method == "POST":
-        print('POST')
         if request.POST['original_url'] and request.POST['custom_url']:
             print ('custom')
             original = request.POST['original_url']
@@ -62,31 +61,27 @@ def shorten(request):
                 return render(request, 'index.html', { 'error' : 'Custom URL already exists'})
         elif request.POST['original_url']:
             original = request.POST['original_url']
-            short = 'http://127.0.0.1:8000/'
-            '''present = False
-
-            while not present:
-                short = random_generate()
-                check = Shorten_Urls.objects.filter(short_url=short)
-                if not check:
-                    newurl = Shorten_Urls(
-                        original_url=original,
-                        short_url=short,
-                    )
-                    newurl.save()
-                    return redirect('/')
-                else:
-                    continue
-                    '''
-            key = Keys.objects.last()
-            short += key.key
-            key.delete()
-            newurl = Shorten_Urls (
-                        original_url=original,
-                        short_url=short,
-                    )
-            newurl.save()
-            return redirect('/')
+            org_url = Shorten_Urls.objects.filter(original_url=original).exists()
+            if org_url:
+                url = Shorten_Urls.objects.get(original_url=original)
+                context = {
+                    "short_url":url,
+                }
+                return render(request, 'index.html', context)
+            else:
+                short = 'http://127.0.0.1:8000/'
+                key = Keys.objects.last()
+                short += key.key
+                key.delete()
+                newurl = Shorten_Urls (
+                            original_url=original,
+                            short_url=short,
+                        )
+                newurl.save()
+                context = {
+                    "short_url":short,
+                }
+                return render(request, 'index.html', context)
         else:
             messages.error(request, "Empty Field")
             return redirect('')

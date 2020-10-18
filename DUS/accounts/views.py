@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -25,7 +25,8 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "Logout successful")
-    return redirect('Homepage')
+    n = request.META['HTTP_REFERER']
+    return HttpResponseRedirect(n)
 
 def login_view(request):
     if not request.user.is_authenticated: # If you are logged in then it will stop logging in again
@@ -38,13 +39,9 @@ def login_view(request):
                 user = authenticate(username= username, password=password)
                 if user is not None:
                     login(request,user)
-                    if request.POST['next'] != '':
-                        return redirect(request.POST['next'][:-1])  # Any better work around than trimming the last slash?
-                    else:
-                        messages.success(request, f"Logged in successfully as {username}")
-                        return redirect('Homepage')
+                    messages.success(request, f"Logged in successfully as {username}")
+                    return redirect('Homepage')
                 else:
-                    messages.error(request, "User Does'nt Exists.")
                     return render(request, "registration/login.html", {'form':form})
         else:
             form = AuthenticationForm()

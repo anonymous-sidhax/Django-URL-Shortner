@@ -1,43 +1,51 @@
 {% extends 'base.html' %}
+{% block title %} Home {% endblock title %}
 {% block body %}
 
-    <!-- Header Start -->
-    <header>
+
+    <div class="container">
+        <div>
         <div style="text-align: center; padding-left: 200px; padding-right: 200px; position: relative;">
         <h2 >DUS is a shortening and link management platform to brand, track and share short URLs using a custom path.</figcaption>
         </h2>
     </div>
-    </header>
-    <!-- Header End -->
-
-    <div style="align-items: center; text-align: center; height: 60%; background-color:1A1A1A;">
-        <div style="top: 30px; position: relative; text-align: center; width: 60%; display: inline-table">
-            <div class="shorten_link_text">
+            <div style="text-align: center; padding-left: 200px; padding-right: 200px; position: relative;">
                 <b>Shorten your links with just a single mouse click !</b>
                 <hr></hr>
                 <form action="short" method="POST" id="form">
-                    {% csrf_token  %}
-                    <input class="textbox_url" type="text" class="form-control" name="original_url" value="" placeholder="  Paste your lengthy url to shorten it" required="">
-                    <input class="textbox_custom" type="text" class="form-control" name="custom_url" value="" placeholder="  Custom URL">
-                    <div id="clickDiv" class="hover_effect">
-                        <ul>
-                          <li>
-                            SHORTEN
-                            <span></span><span></span><span></span><span></span>
-                          </li>
-                        </ul>
-                    </div>
-                    <script>
-                    document.getElementById("clickDiv").onclick = function() {
-                        document.getElementById("form").submit();
-                      };
-                    </script>
+                {% csrf_token  %}
+                    <input class="input" type="text" placeholder="Enter Your URL here" name="original_url" required>
+                    <input class="input mt-2" type="text" placeholder="Custom URL if any" name="custom_url">
+                    <button class="button is-success mt-2">
+                        <span>Get Short Url</span>
+                        <span class="icon is-small">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </span>
+                    </button>                    
                 </form>
             </div>
         </div>
 
     </div>
 
+{% if short_url %}
+<div class="container mt-4">
+  <div class="notification is-primary">
+    Your Short Url : <input type="text" class="input is-small" style="width: 50%; background: transparent; color: white; border: none;" value="{{ short_url }}" id="shorted_url"> 
+    <div class="is-pulled-right">
+        <button class="button is-small is-outlined is-rounded" onclick="copyUrl()">Copy</button>
+    </div>
+  </div>
+</div>
+<script>
+    function copyUrl(){
+        holdText = document.getElementById("shorted_url");
+        textToCopy = holdText.value;
+        navigator.clipboard.writeText(textToCopy);
+        alert("Copied Url : " + textToCopy);
+    }
+</script>
+{% endif %}
 
-    
+
 {% endblock body %}

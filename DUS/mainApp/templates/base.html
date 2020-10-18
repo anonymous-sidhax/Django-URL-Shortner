@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <title> {% block title %} {% endblock title%}</title>   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title> DUS - {% block title %} {% endblock title%}</title>   
 </head>
 <body>
    
@@ -50,7 +51,7 @@
   
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
+      <a class="navbar-item" href="/">
         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
       </a>
   
@@ -109,6 +110,7 @@
               Log in
             </a>
             {% else %}
+            <p class="mr-2" style="font-size: 20px;">Welcome <strong>{{ request.user }}</strong></p>
             <a href="{% url 'accounts:logout' %}" class="button is-primary">Logout</a>
             {% endif %}
           </div>
@@ -123,11 +125,23 @@
 
 {% endblock body %}
 
-<footer class="footer mt-auto">
-    <div class="container text-center">
-      <span class="text-muted">DUS &copy; 2020</span>
-    </div>
+<footer class="footer my-5">
+  <div class="content has-text-centered">
+    <p>
+      Copyright &copy;<strong> DUS</strong>
+    </p>
+  </div>
 </footer>
+
+<script>
+  const message = document.querySelector('.message');
+  const delete_button = document.querySelector('.delete');
+
+  delete_button.addEventListener('click', ()=> {
+    message.classList.add('is-hidden');
+  })
+
+</script>
 
 </body>
 </html>
