@@ -100,6 +100,10 @@ def shorten(request):
     else:
         return redirect('')
 
+
+def shortening_page(request):
+    return render(request, 'shortening.html')
+
 # For generating random string
 def random_generate():
     return ''.join(random.choice(USED_FOR_MAPPING) for i in range(3))
