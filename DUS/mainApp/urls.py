@@ -6,7 +6,6 @@ from django.contrib.auth import views
 from .views import home, redirection, shorten, dashboard, shortening_page
 import accounts
 
-
 urlpatterns = [
     path('', home, name="Homepage"),
     path('short', shorten, name="Shorten Url"),

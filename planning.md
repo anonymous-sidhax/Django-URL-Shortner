@@ -1,32 +1,20 @@
-### Database Columns: 
-- id (DB generated sequence ID)
-- original_url — orginal URL value
-- shorten_url
-- creation_date
-- expiration_date
-- clicks
-
 ### Requirements:
 - Ads
 - Setting password for links
 - Browser Extension
 - multiple countries
 - https
-- Given a URL, our service should generate a shorter and unique alias of it. This is called a short link. This link should be short enough to be easily copied and pasted into applications.
-- When users access a short link, our service should redirect them to the original link.
-- Users should optionally be able to pick a custom short link for their URL.
+
 - Links will expire after a standard default timespan. Users should be able to specify the expiration time.
 - How do we detect and prevent abuse? A malicious user can put us out of business by consuming all URL keys in the current design. To prevent abuse, we can limit users via their api_dev_key. Each api_dev_key can be limited to a certain number of URL creations and redirections per some time period (which may be set to a different duration per developer key).
 
 ### Non-Functional Requirements:
 - The system should be highly available. This is required because, if our service is down, all the URL redirections will start failing.
 - URL redirection should happen in real-time with minimal latency.
-- Shortened links should not be guessable (not predictable).
 
 ### Extended Requirements:
 - Analytics; e.g., how many times a redirection happened?
 - Our service should also be accessible through REST APIs by other services.
-
 
 ### API:
 We can have SOAP or REST APIs to expose the functionality of our service. Following could be the definitions of the APIs for creating and deleting URLs:
