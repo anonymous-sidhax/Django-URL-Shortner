@@ -1,4 +1,4 @@
-# Djnago-URL-Shortner
+# Django-URL-Shortner
 This is a URL Shortner Website created using Python-Django.
 
 # Contributors
