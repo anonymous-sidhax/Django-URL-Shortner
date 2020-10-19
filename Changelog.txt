@@ -23,4 +23,9 @@
   - Fixed Double Slash Issue (Siddesh)
   
 19th October 2020
-  - 
+  - Added Updation, Creation, Expiration Date (Siddesh)
+  - Improving the homepage (Aayush)
+  - Separate page for shorten (Rohit)
+
+20th October 2020
+  - User wise visit tracking (Siddesh)

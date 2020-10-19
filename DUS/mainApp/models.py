@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 
-# Create your models here.
 class Keys(models.Model):
     id = models.AutoField(primary_key=True)
     key = models.CharField(max_length=6)

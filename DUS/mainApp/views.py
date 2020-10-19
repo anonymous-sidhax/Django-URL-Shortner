@@ -12,23 +12,12 @@ import string
 
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
-
 def home(request):
     return render(request, "index.html")
 
 @login_required(login_url='/accounts/login/')
 def dashboard(request):
     return render(request, "dashboard.html")
-
-# def shortenn(request):
-#     url = "http://127.0.0.1:8000/"
-#     original_url = request.GET.get('original_url')
-#     key = Keys.objects.last()
-#     url += key.key
-#     key.delete()
-#     shorten_url = Shorten_Urls(original_url=original_url, short_url=url)
-#     shorten_url.save()
-#     return redirect('/')
 
 def redirection(request, url):
     short_url = "http://127.0.0.1:8000" + request.path
@@ -62,6 +51,7 @@ def shorten(request):
                     newurl = Shorten_Urls(
                         original_url=original,
                         short_url=short,
+                        user=request.user,
                     )
                     newurl.save()
                     context = {
@@ -88,6 +78,7 @@ def shorten(request):
                 newurl = Shorten_Urls (
                             original_url=original,
                             short_url=short,
+                            user=request.user,
                         )
                 newurl.save()
                 context = {
@@ -99,7 +90,6 @@ def shorten(request):
             return redirect('')
     else:
         return redirect('')
-
 
 def shortening_page(request):
     return render(request, 'shortening.html')
