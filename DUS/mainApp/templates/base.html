@@ -111,7 +111,7 @@
             </a>
             {% else %}
             <p class="mr-2" style="font-size: 20px;">Welcome <strong>{{ request.user }}</strong></p>
-            <a href="{% url 'accounts:logout' %}" class="button is-primary">Logout</a>
+            <a href="{% url 'accounts:logout' %}" class="button is-danger">Logout</a>
             {% endif %}
           </div>
         </div>

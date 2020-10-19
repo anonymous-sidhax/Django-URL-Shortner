@@ -44,21 +44,33 @@ def redirection(request, url):
 def shorten(request):
     if request.method == "POST":
         if request.POST['original_url'] and request.POST['custom_url']:
-            print ('custom')
             original = request.POST['original_url']
-            short = 'http://127.0.0.1:8000/' + str(request.POST['custom_url'])
-            check = Shorten_Urls.objects.filter(short_url=short)
-            print ('check')
-            if not check:
-                newurl = Shorten_Urls(
-                    original_url=original,
-                    short_url=short,
-                )
-                newurl.save()
-                return redirect('/')
+            org_url = Shorten_Urls.objects.filter(original_url=original).exists()
+            if org_url:
+                url = Shorten_Urls.objects.get(original_url=original)
+                context = {
+                    "short_url":url,
+                }
+                messages.error(request, "Short Url already exists. Cannot create custom for it.")
+                return render(request, 'index.html', context)
             else:
-                messages.error(request, "Already Exists")
-                return render(request, 'index.html', { 'error' : 'Custom URL already exists'})
+                original = request.POST['original_url']
+                short = 'http://127.0.0.1:8000/' + str(request.POST['custom_url'])
+                check = Shorten_Urls.objects.filter(short_url=short)
+                print ('check')
+                if not check:
+                    newurl = Shorten_Urls(
+                        original_url=original,
+                        short_url=short,
+                    )
+                    newurl.save()
+                    context = {
+                        "short_url":short,
+                    }
+                    return render(request, 'index.html', context)
+                else:
+                    messages.error(request, "Already Exists")
+                    return render(request, 'index.html', { 'error' : 'Custom URL already exists'})
         elif request.POST['original_url']:
             original = request.POST['original_url']
             org_url = Shorten_Urls.objects.filter(original_url=original).exists()
