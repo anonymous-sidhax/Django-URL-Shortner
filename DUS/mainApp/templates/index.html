@@ -1,32 +1,91 @@
 {% extends 'base.html' %}
 {% block title %} Home {% endblock title %}
 {% block body %}
+{% load static %}
+
+<style>
+    *{
+        scroll-behavior: smooth;
+    }
+    .is-red{
+        background-color: #ff3b3b;
+        opacity: 0.9;
+        color: #f4f4f4;
+    }
+    .is-red:hover{
+        background-color: #ff3b3b;
+        opacity: 1;
+        color: #f4f4f4;
+    }
+    .is-red-{
+        background-color: #ff3b3b;
+        opacity: 0.9;
+        color: #f4f4f4;
+    }
+    .is-red-:hover{
+        background-color: #ff3b3b;
+        opacity: 1;
+        color: #f4f4f4;
+    }
+    @media screen and (max-width: 768px){
+        div.columns.is-variable.is-centered#container-{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column-reverse;
+            }
+
+        .button.is-red{
+            font-size: 1rem;
+        }
+        }
 
 
-    <div class="container">
-        <div>
-        <div style="text-align: center; padding-left: 200px; padding-right: 200px; position: relative;">
-        <h2 >DUS is a shortening and link management platform to brand, track and share short URLs using a custom path.</figcaption>
-        </h2>
-    </div>
-            <div style="text-align: center; padding-left: 200px; padding-right: 200px; position: relative;">
-                <b>Shorten your links with just a single mouse click !</b>
-                <hr></hr>
-                <form action="short" method="POST" id="form">
-                {% csrf_token  %}
-                    <input class="input" type="text" placeholder="Enter Your URL here" name="original_url" required>
-                    <input class="input mt-2" type="text" placeholder="Custom URL if any" name="custom_url">
-                    <button class="button is-success mt-2">
-                        <span>Get Short Url</span>
-                        <span class="icon is-small">
-                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        </span>
-                    </button>                    
-                </form>
+
+</style>
+
+
+<section class="section">
+    <div class="conatiner">
+        <div class="columns is-variable is-centered" id="container-">
+            <div class="column is-7">
+                <div class="card" style="box-shadow:none;">
+                    <div class="card-content">
+                        <h2 class="is-size-1 is-size-3-tablet is-size-3-mobile" style="font-weight: 550;">Short Your Long Url</h2>
+                        <p class="is-size-5 mt-4 is-size-6-tablet is-size-6-mobile" style="color: #666666;">DUS is a shortening and link management platform to brand, track and share short URLs using a custom path.</p>
+                        <div class="fields mt-6"><a class="button is-red is-normal-mobile is-medium is-normal-mobile is-normal-tablet" href="#section">Get Started</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-two-fifths is-three-quarters-mobile" >
+                <div class="card" style="box-shadow:none;">
+                    <div class="card-image"><img src="{% static 'assets/img/undrawimg.svg' %}" alt=""></div>
+                </div>
             </div>
         </div>
-
     </div>
+</section>
+
+
+<section class="section" id="section" style="background-color: #f4f4f4;">
+    <form action="short" method="POST" id="form">
+        {% csrf_token  %}
+        <div class="conatiner">
+            <div class="columns is-variable is-centered">
+                <div class="column is-one-thirds">
+                    <div class="fields">
+                        <input class="input is-medium" type="text" placeholder="Enter Your URL here" name="original_url" required>
+                        <input class="input mt-2" type="text" placeholder="Custom URL if any" name="custom_url">
+                    </div>
+                </div>
+                <div class="column is-one-fifth">
+                    <div class="buttons" style="justify-content: center;"><button type="submit" class="button is-medium input is-red-" >Shorten</button></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
 
 {% if short_url %}
 <div class="container mt-4">
