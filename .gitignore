@@ -1,7 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+<<<<<<< Updated upstream
 */__pycache__/*
+=======
+>>>>>>> Stashed changes
 
 
 # Byte-compiled / optimized / DLL files
@@ -141,4 +144,8 @@ dmypy.json
 .pytype/
 
 # Cython debug symbols
+<<<<<<< Updated upstream
 cython_debug/
+=======
+cython_debug/
+>>>>>>> Stashed changes
