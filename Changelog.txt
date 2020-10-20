@@ -30,3 +30,5 @@
 20th October 2020
   - User wise visit tracking (Siddesh)
   - Heroku Files Added (Siddesh)
+  - Adding Expiry Page (Rohit)
+  - Improving UI - Homepage (Ayush)
