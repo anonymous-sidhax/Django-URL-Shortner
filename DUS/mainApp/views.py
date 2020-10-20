@@ -9,6 +9,8 @@ from .forms import UserRegistrationForm, LoginForm
 import accounts.urls
 import random
 import string
+from django.utils import timezone
+
 
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
@@ -23,11 +25,12 @@ def redirection(request, url):
     short_url = "http://127.0.0.1:8000" + request.path
     check = Shorten_Urls.objects.get(short_url=short_url)
     try:
-        if(check.expire_flag == False):
+        if(check.expire_flag == False or timezone.now() < check.expiration_date):
             check.visits += 1
             check.save()
             return HttpResponseRedirect(check.original_url)
         else:
+            check.expire_flag = True
             return render(request, 'expired.html')
     except Shorten_Urls.DoesNotExist:
         return render(request, 'index.html', {'error' : "error"})
