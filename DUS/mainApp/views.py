@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.shortcuts import render, HttpResponseRedirect, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Keys, Shorten_Urls
 from django.contrib.auth.models import User
@@ -21,12 +21,14 @@ def dashboard(request):
 
 def redirection(request, url):
     short_url = "http://127.0.0.1:8000" + request.path
+    check = Shorten_Urls.objects.get(short_url=short_url)
     try:
-        check = Shorten_Urls.objects.get(short_url=short_url)
-        check.visits += 1
-        check.save()
-        print (short_url)
-        return HttpResponseRedirect(check.original_url)
+        if(check.expire_flag == False):
+            check.visits += 1
+            check.save()
+            return HttpResponseRedirect(check.original_url)
+        else:
+            return render(request, 'expired.html')
     except Shorten_Urls.DoesNotExist:
         return render(request, 'index.html', {'error' : "error"})
 
