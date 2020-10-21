@@ -9,15 +9,19 @@ import accounts.urls
 import random
 import string
 from django.utils import timezone
+from datetime import datetime, timedelta
 
 
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
 def home(request):
+
     return render(request, "index.html")
 
 @login_required(login_url='/accounts/login/')
 def dashboard(request):
+    print(datetime.now())
+    print(datetime.now() + timedelta(days=1))
     return render(request, "dashboard.html")
 
 def redirection(request, url):
@@ -51,7 +55,6 @@ def shorten(request):
                 original = request.POST['original_url']
                 short = 'http://127.0.0.1:8000/' + str(request.POST['custom_url'])
                 check = Shorten_Urls.objects.filter(short_url=short)
-                print ('check')
                 if not check:
                     newurl = Shorten_Urls(
                         original_url=original,
@@ -80,15 +83,12 @@ def shorten(request):
                 key = Keys.objects.last()
                 short += key.key
                 key.delete()
-                newurl = Shorten_Urls (
-                            original_url=original,
-                            short_url=short,
-                            user=request.user,
-                        )
+                newurl = Shorten_Urls(original_url=original, short_url=short, user=request.user, creation_date=datetime.now())
                 newurl.save()
                 context = {
                     "short_url":short,
                 }
+                messages.success(request, "Url created successfully. Check below")
                 return render(request, 'index.html', context)
         else:
             messages.error(request, "Empty Field")
