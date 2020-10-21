@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+issues_choices = (('Report a bug','Report a bug'),('Feature Request','Feature Request'),('Enhancement','Enhancement'),)
+
 class Keys(models.Model):
     id = models.AutoField(primary_key=True)
     key = models.CharField(max_length=6)
@@ -20,4 +23,16 @@ class Shorten_Urls(models.Model):
     visits = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.short_url
+        return self.short_url 
+
+
+
+class ContactUsModel(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    issue = models.CharField(max_length=100, choices=issues_choices, default='Report a bug')
+    message = models.TextField()
+
+
+    def __str__(self):
+        return self.name + ' | ' + str(self.message)[:200]
