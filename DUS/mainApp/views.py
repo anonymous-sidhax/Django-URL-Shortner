@@ -118,3 +118,8 @@ def contactus(request):
             contatcus = ContactUsModel(name=name, email=email, issue=issue, message=message)
             contatcus.save()
     return render(request, "contactus.html", {'form': form})
+
+
+
+def aboutus(request):
+    return render(request, "aboutus.html", {})

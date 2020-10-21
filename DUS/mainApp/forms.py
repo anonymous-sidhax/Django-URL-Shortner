@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 class ConatcUsForm(forms.ModelForm):
     name = forms.CharField(max_length=255)
+    terms_and_conditions = forms.BooleanField()
     class Meta:
         model = ContactUsModel
         fields = '__all__'

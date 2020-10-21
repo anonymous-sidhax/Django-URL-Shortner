@@ -6,7 +6,11 @@ Contact us
 
 {% block body %}
 
-
+<style>
+  .errorlist{
+    color: #f03a5f;;
+  }
+</style>
 <section class="section">
     <div class="container">
         <div class="columns is-centered is-multiline">
@@ -32,6 +36,7 @@ Contact us
                                     <i class="fa fa-user"></i>
                                   </span>
                                 </div>
+                                <p class="help is-danger">{{form.name.errors}}</p>
                               </div>
                                  
                       
@@ -45,6 +50,7 @@ Contact us
                                     <i class="fa fa-envelope"></i>
                                   </span>
                                 </div>
+                                <p class="help is-danger">{{form.email.errors}}</p>
                               </div>
                               
                               <div class="field">
@@ -54,6 +60,7 @@ Contact us
                                     {% render_field form.issue  %}
                                   </div>
                                 </div>
+                                <p class="help is-danger">{{form.issue.errors}}</p>
                               </div>
                               
                               <div class="field">
@@ -61,15 +68,18 @@ Contact us
                                 <div class="control">
                                   {% render_field form.message placeholder="Your Message" class="textarea" %}
                                 </div>
+                                <p class="help is-danger">{{form.message.errors}}</p>
+                                
                               </div>
                               
                               <div class="field">
                                 <div class="control">
                                   <label class="checkbox">
-                                    <input type="checkbox">
+                                    {% render_field form.terms_and_conditions %}
                                     I agree to the <a href="#">terms and conditions</a>
                                   </label>
                                 </div>
+                                <p class="help is-danger">{{form.terms_and_conditions.errors}}</p>
                               </div>
                               
                             <div class="field my-6">
