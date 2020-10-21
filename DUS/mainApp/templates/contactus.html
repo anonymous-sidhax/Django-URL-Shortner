@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+Contact us
+{% endblock title %}
+
+{% block body %}
+
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered is-multiline">
+            <div class="column is-full">
+                <div class="card has-text-centered" style="box-shadow: none;">
+                    <div class="card-content">
+                        <h3 class="is-size-2 is-size-3-mobile title">Contact Us</h3>
+                        <p class="subtitle is-size-6 mt-1">Get in touch with us if you have any questions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="card ">
+                    <div class="card-content">
+                        <form action="{% url 'contactus' %}" novalidate method="POST">
+
+                              {% csrf_token %}
+                              <div class="field">
+                                <label class="label">Username</label>
+                                <div class="control has-icons-left has-icons-right">
+                                        {% render_field form.name placeholder="Username" class="input" %}
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                  </span>
+                                </div>
+                              </div>
+                                 
+                      
+                              
+                              
+                              <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    {% render_field form.email placeholder="Email Address" class="input" %}
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <div class="field">
+                                <label class="label">Issue</label>
+                                <div class="control">
+                                  <div class="select ">
+                                    {% render_field form.issue  %}
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="field">
+                                <label class="label">Message</label>
+                                <div class="control">
+                                  {% render_field form.message placeholder="Your Message" class="textarea" %}
+                                </div>
+                              </div>
+                              
+                              <div class="field">
+                                <div class="control">
+                                  <label class="checkbox">
+                                    <input type="checkbox">
+                                    I agree to the <a href="#">terms and conditions</a>
+                                  </label>
+                                </div>
+                              </div>
+                              
+                            <div class="field my-6">
+                                <div class="control">
+                                    <button class="button is-rounded is-medium input is-normal is-danger">Submit</button>
+                                  </div>
+                            </div>
+                                
+                              
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock body %}

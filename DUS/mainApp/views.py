@@ -1,14 +1,15 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Keys, Shorten_Urls
+from .models import Keys, Shorten_Urls, ContactUsModel
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import UserRegistrationForm, LoginForm
+from .forms import ConatcUsForm
 import accounts.urls
 import random
 import string
+from django.utils import timezone
+
 
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
@@ -23,11 +24,12 @@ def redirection(request, url):
     short_url = "http://127.0.0.1:8000" + request.path
     check = Shorten_Urls.objects.get(short_url=short_url)
     try:
-        if(check.expire_flag == False):
+        if(check.expire_flag == False or timezone.now() < check.expiration_date):
             check.visits += 1
             check.save()
             return HttpResponseRedirect(check.original_url)
         else:
+            check.expire_flag = True
             return render(request, 'expired.html')
     except Shorten_Urls.DoesNotExist:
         return render(request, 'index.html', {'error' : "error"})
@@ -100,3 +102,18 @@ def shortening_page(request):
 # For generating random string
 def random_generate():
     return ''.join(random.choice(USED_FOR_MAPPING) for i in range(3))
+
+
+def contactus(request):
+    form = ConatcUsForm()
+    if request.method == 'POST':
+        form = ConatcUsForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            issue = form.cleaned_data.get('issue')
+            message = form.cleaned_data.get('message')
+            
+            contatcus = ContactUsModel(name=name, email=email, issue=issue, message=message)
+            contatcus.save()
+    return render(request, "contactus.html", {'form': form})
