@@ -10,6 +10,5 @@ urlpatterns = [
     path('short', shorten, name="Shorten Url"),
     path('<str:url>', redirection, name="Redirection To Original Page"),
     path('dashboard/', dashboard, name="DUS Dashboard"),
-    path('shortening/', shortening_page, name="Shortening Page"),
     path('contactus/', contactus, name="contactus"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
