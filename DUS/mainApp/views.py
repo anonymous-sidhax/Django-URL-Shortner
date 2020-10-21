@@ -22,8 +22,8 @@ def dashboard(request):
 
 def redirection(request, url):
     short_url = "http://127.0.0.1:8000" + request.path
-    check = Shorten_Urls.objects.get(short_url=short_url)
     try:
+        check = Shorten_Urls.objects.get(short_url=short_url)
         if(check.expire_flag == False or timezone.now() < check.expiration_date):
             check.visits += 1
             check.save()
@@ -32,7 +32,8 @@ def redirection(request, url):
             check.expire_flag = True
             return render(request, 'expired.html')
     except Shorten_Urls.DoesNotExist:
-        return render(request, 'index.html', {'error' : "error"})
+        messages.error(request, "Url you are try to reach is not available. Try a different url or create one.")
+        return redirect("/")
 
 def shorten(request):
     if request.method == "POST":
