@@ -85,11 +85,7 @@ def shorten(request):
                 key = Keys.objects.last()
                 short += key.key
                 key.delete()
-<<<<<<< HEAD
                 newurl = Shorten_Urls(original_url=original, short_url=short, user=request.user, creation_date=datetime.now(), expiration_date=datetime.now() + timedelta(days=7))
-=======
-                newurl = Shorten_Urls(original_url=original, short_url=short, user=request.user, creation_date=datetime.now())
->>>>>>> d670ef426e53e9ccf65273385f4e1304e2190fc3
                 newurl.save()
                 context = {
                     "short_url":short,
