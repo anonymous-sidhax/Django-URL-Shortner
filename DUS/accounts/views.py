@@ -15,11 +15,10 @@ def signup_view(request):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
-            user = User.objects.create_user(username=username, email=email, password=password)
+            User.objects.create_user(username=username, email=email, password=password)
             return redirect('accounts:login')
     
     return render(request, "registration/signup.html", {'form':form})
-
 
 
 def logout_view(request):
