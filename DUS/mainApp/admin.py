@@ -3,5 +3,6 @@ from .models import *
 
 # Register your models here.
 admin.site.register(Keys)
-admin.site.register(Shorten_Urls)
-admin.site.register(ContactUsModel)
+admin.site.register(ShortenUrl)
+admin.site.register(ContactUs)
+admin.site.register(DashboardStats)
