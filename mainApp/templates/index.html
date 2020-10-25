@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+{% load static %}
+
+<style>
+    *{
+        scroll-behavior: smooth;
+    }
+    .is-red{
+        background-color: #ff3b3b;
+        opacity: 0.9;
+        color: #f4f4f4;
+    }
+    .is-red:hover{
+        background-color: #ff3b3b;
+        opacity: 1;
+        color: #f4f4f4;
+    }
+    .is-red-{
+        background-color: #ff3b3b;
+        opacity: 0.9;
+        color: #f4f4f4;
+    }
+    .is-red-:hover{
+        background-color: #ff3b3b;
+        opacity: 1;
+        color: #f4f4f4;
+    }
+    @media screen and (max-width: 768px){
+        div.columns.is-variable.is-centered#container-{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column-reverse;
+            }
+
+        .button.is-red{
+            font-size: 1rem;
+        }
+    }
+    #menu{
+        transform: translateX(100%);
+    }
+    #menu.active{
+        transition: translateX(0%);
+    }
+
+</style>
+
+<!--<script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
+
+<aside  class="menu" id="menu" style="position: absolute; right: 0;top: 0;z-index: 999; padding-bottom: 20px; transition: 0.5 all ease-in-out; ">
+    <div class="card" style="padding: 60px;width: 100%; height: 93vh;padding-left: 30px;">
+        <p class="subtitle is-size-4" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            Create Link <a href="" class="button-close is-size-6">close</a>
+          </p>
+          <ul class="menu-list">
+              <li class="my-4">
+                  <div class="field">
+                  <div class="control">
+                     <div class="select">
+
+                        <select>
+                            <option value="">dus.com</option>
+                            <option value=""><button class="button is-primary">Lorem, ipsum dolor.</button></option>
+                        </select>
+                     </div>
+                  </div>
+              </div></li>
+            <li class="my-4"><div class="field"><input type="text" name="custom_url" id="custom_url" class="input" placeholder="custom link"></div></li>
+          </ul>
+    </div>
+    <div class="mb-6"><button class="button input is-danger">Create Link</button></div>
+</aside>
+<section class="section">
+    <div class="conatiner">
+        <div class="columns is-variable is-centered" id="container-">
+            <div class="column is-7">
+                <div class="card" style="box-shadow:none;">
+                    <div class="card-content">
+                        <h2 class="is-size-1 is-size-3-tablet is-size-3-mobile" style="font-weight: 550;"><strong>Shorten Your Long URL</strong></h2>
+
+                        <p class="is-size-5 mt-4 is-size-6-tablet is-size-6-mobile" style="color: #666666;">DUS is a shortening and link management platform to Brand,<br> Track and Share short URLs using a custom path.</p>
+                        <div class="fields mt-6"><a class="button is-red is-normal-mobile is-medium is-normal-mobile is-normal-tablet" href="#short_section">Get Started</a></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="column is-two-fifths is-three-quarters-mobile" >
+                <div class="card" style="box-shadow:none;">
+                    <div class="card-image"><img src="{% static 'assets/img/undrawimg.svg' %}" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section" id="short_section" style="background-color: #f4f4f4;">
+    <form action="short" method="POST" id="form">
+        {% csrf_token  %}
+        <div class="conatiner">
+            <div class="columns is-variable is-centered">
+                <div class="column is-one-thirds">
+                    <div class="fields">
+                        <input class="input is-medium" type="text" placeholder="Enter Your URL here" name="original_url" required>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-fifth">
+                <div class="buttons" style="justify-content: center;"><button type="submit" class="button is-medium input is-red-" >Shorten</button></div>
+            </div>
+            <!--<div class="g-recaptcha" data-sitekey="your_site_key"></div>-->
+        </div>
+    </form>
+</section>
+
+
+
+
+{% if short_url %}
+<div class="container mt-4">
+  <div class="notification is-primary">
+    Your Short Url : <input type="text" class="input is-small" style="width: 50%; background: transparent; color: white; border: none;" value="{{ short_url }}" id="shorted_url"> 
+    <div class="is-pulled-right">
+        <button class="button is-small is-outlined is-rounded" onclick="copyUrl()">Copy</button>
+    </div>
+  </div>
+</div>
+<script>
+    function copyUrl(){
+        holdText = document.getElementById("shorted_url");
+        textToCopy = holdText.value;
+        navigator.clipboard.writeText(textToCopy);
+        alert("Copied Url : " + textToCopy);
+    }
+    var custom_link = document.querySelector('.custom-link');
+    let menu_ = document.querySelector('#menu');
+    custom_link.addEventListener('click', function(){
+        console.log('clicked');
+    })
+
+</script>
+{% endif %}
+
+{% endblock body %}

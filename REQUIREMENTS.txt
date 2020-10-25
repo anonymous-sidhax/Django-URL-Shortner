@@ -1,8 +1,8 @@
-# Library dependencies for the python code.  
-# You need to install these with:
-# `pip install -r requirements.txt` before you can run.
-
-django
-gunicorn
-django-heroku
-django-widget-tweaks
+asgiref==3.2.10
+Django==3.1.2
+django-widget-tweaks==1.4.8
+gunicorn==20.0.4
+pytz==2020.1
+sqlparse==0.4.1
+whitenoise==5.2.0
+geoip2==0.1.0
