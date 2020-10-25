@@ -12,8 +12,8 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 
 
-from django.contrib.gis.geoip2 import GeoIP2
-import os
+#from django.contrib.gis.geoip2 import GeoIP2
+#import os
 
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
