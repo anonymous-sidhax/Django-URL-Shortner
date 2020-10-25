@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'd7p_w3ts$!7au#m6npl+l%#9y+sut8-p-jhri33el^i*xftct1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['duspy.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
