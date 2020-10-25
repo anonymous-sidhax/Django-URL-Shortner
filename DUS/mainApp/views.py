@@ -11,6 +11,10 @@ import string
 from django.utils import timezone
 from datetime import datetime, timedelta
 
+
+from django.contrib.gis.geoip2 import GeoIP2
+import os
+
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
 def home(request):
@@ -28,6 +32,7 @@ def redirection(request, url):
         if(check.expire_flag == False or datetime.now() < check.expiration_date):
             check.visits += 1
             check.save()
+            dashboard_logging(request)
 
             return HttpResponseRedirect(check.original_url)
         else:
@@ -164,22 +169,30 @@ def aboutus(request):
 ###########################################   
 #       For Logging Dashboard Stats       #
 ###########################################
-'''
-from django.contrib.gis.utils import GeoIP
 
 
 def dashboard_logging(request):
     a = get_ip(request)
     print (a)
+    print (os.environ[request.META.get('REMOTE_ADDR')])
+
 
 def get_ip(request):
     
-    g = GeoIP()
-    ip = request.META.get('REMOTE_ADDR', None)
-    if ip:
-        city = g.city(ip)['city']
-    else:
-        city = 'Rome' # default city
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
-    return 
-'''
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+    # g = GeoIP2()
+    # ip = request.META.get('REMOTE_ADDR', None)
+    # if ip:
+    #     city = g.city(ip)['city']
+    # else:
+    #     city = 'Rome' # default city
+
+    # return 

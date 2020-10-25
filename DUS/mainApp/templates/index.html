@@ -48,6 +48,8 @@
 
 </style>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <aside  class="menu" id="menu" style="position: absolute; right: 0;top: 0;z-index: 999; padding-bottom: 20px; transition: 0.5 all ease-in-out; ">
     <div class="card" style="padding: 60px;width: 100%; height: 93vh;padding-left: 30px;">
         <p class="subtitle is-size-4" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
@@ -109,6 +111,7 @@
             <div class="column is-one-fifth">
                 <div class="buttons" style="justify-content: center;"><button type="submit" class="button is-medium input is-red-" >Shorten</button></div>
             </div>
+            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
         </div>
     </form>
 </section>
