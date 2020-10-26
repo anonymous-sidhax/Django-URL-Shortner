@@ -10,8 +10,6 @@ import random
 import string
 from django.utils import timezone
 from datetime import datetime, timedelta
-
-2
 import os
 
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
@@ -25,7 +23,7 @@ def dashboard(request):
     return render(request, "dashboard.html")
 
 def redirection(request, url):
-    short_url = "http://127.0.0.1:8000" + request.path
+    short_url = "https://duspy.herokuapp.com/" + request.path
     try:
         check = ShortenUrl.objects.get(short_url=short_url)
         if(check.expire_flag == False or datetime.now() < check.expiration_date):
@@ -60,7 +58,7 @@ def shorten_for_logged_in_users(request):
                 if not expiry_days:
                     expiry_days = 7
 
-                short = 'http://127.0.0.1:8000/' + str(request.POST['custom_url'])
+                short = 'https://duspy.herokuapp.com/' + str(request.POST['custom_url'])
                 check = ShortenUrl.objects.filter(short_url=short)
                 if not check:
                     newurl = ShortenUrl(
@@ -91,7 +89,7 @@ def shorten_for_logged_in_users(request):
                 }
                 return render(request, 'dashboard.html', context)
             else:
-                short = 'http://127.0.0.1:8000/'
+                short = 'https://duspy.herokuapp.com/'
                 key = Keys.objects.last()
                 short += key.key
                 key.delete()
@@ -120,7 +118,7 @@ def shorten(request):
                 }
                 return render(request, 'index.html', context)
             else:
-                short = 'http://127.0.0.1:8000/'
+                short = 'https://duspy.herokuapp.com/'
                 key = Keys.objects.last()
                 short += key.key
                 key.delete()
