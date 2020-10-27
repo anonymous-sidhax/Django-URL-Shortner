@@ -31,10 +31,10 @@ def get_url():
 
 
 def home(request):
-    res = get_url()
-    for it in res:
-        k = Keys(key=it)
-        k.save()
+#     res = get_url()
+#     for it in res:
+#         k = Keys(key=it)
+#         k.save()
     return render(request, "index.html")
 
 @login_required(login_url='/accounts/login/')
