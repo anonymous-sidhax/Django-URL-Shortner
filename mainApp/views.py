@@ -14,8 +14,27 @@ import os
 
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
-def home(request):
+def get_url():
+	print(len(USED_FOR_MAPPING))
+	res = set()
+	for i in range(pow(64,3)):
+		n = i
+		curr = ""
+		for j in range(3):
+			curr+=USED_FOR_MAPPING[n%64]
+			n//= 64
+		res.add(curr)
 
+	return res
+
+
+
+
+def home(request):
+    res = get_url()
+    for it in res:
+        k = Keys(key=it)
+        k.save()
     return render(request, "index.html")
 
 @login_required(login_url='/accounts/login/')
@@ -135,9 +154,6 @@ def shorten(request):
     else:
         return redirect('')
 
-# For generating random string
-def random_generate():
-    return ''.join(random.choice(USED_FOR_MAPPING) for i in range(3))
 
 def contactus(request):
     form = ContactUsForm()
