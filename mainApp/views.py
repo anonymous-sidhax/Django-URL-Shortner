@@ -12,6 +12,8 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 import os
 
+#HOST = 'https://duspy.herokuapp.com/'
+HOST = 'http://127.0.0.1:8000/'
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
 def get_url():
@@ -42,7 +44,7 @@ def dashboard(request):
     return render(request, "dashboard.html")
 
 def redirection(request, url):
-    short_url = "https://duspy.herokuapp.com/" + request.path
+    short_url = HOST + request.path
     try:
         check = ShortenUrl.objects.get(short_url=short_url)
         if(check.expire_flag == False or datetime.now() < check.expiration_date):
@@ -77,7 +79,7 @@ def shorten_for_logged_in_users(request):
                 if not expiry_days:
                     expiry_days = 7
 
-                short = 'https://duspy.herokuapp.com/' + str(request.POST['custom_url'])
+                short = HOST + str(request.POST['custom_url'])
                 check = ShortenUrl.objects.filter(short_url=short)
                 if not check:
                     newurl = ShortenUrl(
@@ -108,9 +110,10 @@ def shorten_for_logged_in_users(request):
                 }
                 return render(request, 'dashboard.html', context)
             else:
-                short = 'https://duspy.herokuapp.com/'
                 key = Keys.objects.last()
-                short += key.key
+                short = HOST + key.key
+                print (short)
+                print (HOST)
                 key.delete()
                 newurl = ShortenUrl(original_url=original, short_url=short, user=request.user, creation_date=datetime.now(), expiration_date=(datetime.now() + timedelta(days=int(expiry_days))))
                 newurl.save()
@@ -137,9 +140,8 @@ def shorten(request):
                 }
                 return render(request, 'index.html', context)
             else:
-                short = 'https://duspy.herokuapp.com/'
                 key = Keys.objects.last()
-                short += key.key
+                short = HOST + key.key
                 key.delete()
                 newurl = ShortenUrl(original_url=original, short_url=short, creation_date=datetime.now(), expiration_date=datetime.now() + timedelta(days=7))
                 newurl.save()
