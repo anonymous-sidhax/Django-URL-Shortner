@@ -144,6 +144,7 @@ def shorten(request):
                 short = HOST + key.key
                 key.delete()
                 newurl = ShortenUrl(original_url=original, short_url=short, creation_date=datetime.now(), expiration_date=datetime.now() + timedelta(days=7))
+                print (newurl.short_url)
                 newurl.save()
                 context = {
                     "short_url":short,
