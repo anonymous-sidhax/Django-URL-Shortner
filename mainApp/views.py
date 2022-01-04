@@ -12,8 +12,8 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 import os
 
-HOST = 'https://duspy.herokuapp.com/'
-#HOST = 'http://127.0.0.1:8000/'
+#HOST = 'https://duspy.herokuapp.com/'
+HOST = 'http://127.0.0.1:8000/'
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
 def get_url():
@@ -44,10 +44,12 @@ def dashboard(request):
     return render(request, "dashboard.html")
 
 def redirection(request, url):
-    short_url = HOST + request.path
+    short_url = HOST[:-1] + request.path
+    print (short_url)
     try:
         check = ShortenUrl.objects.get(short_url=short_url)
-        if(check.expire_flag == False or datetime.now() < check.expiration_date):
+        print(check)
+        if(check.expire_flag == 0 or datetime.now() < check.expiration_date):
             check.visits += 1
             check.save()
             dashboard_logging(request)
@@ -189,7 +191,7 @@ def aboutus(request):
 def dashboard_logging(request):
     a = get_ip(request)
     print (a)
-    print (os.environ[request.META.get('REMOTE_ADDR')])
+    #print (os.environ[request.META.get('REMOTE_ADDR')])
 
 
 def get_ip(request):
