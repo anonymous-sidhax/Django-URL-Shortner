@@ -4,22 +4,26 @@
 {% load static %}
 
 
-<section class="section h-100" id="short_section" style="background-color: #f4f4f4;">
-    <form action="short" method="POST" id="form">
-        {% csrf_token  %}
-        <div class="conatiner">
-            <div class="columns is-variable is-centered">
-                <div class="column is-one-thirds">
-                    <div class="fields">
-                        <input class="input is-medium" type="text" placeholder="Enter Your URL here" name="original_url" required>
+<section class="container mt-4" id="short_section">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <form action="short" method="POST" id="form">
+                {% csrf_token  %}
+                <div class="conatiner">
+                    <div class="columns is-variable is-centered">
+                        <div class="column is-one-thirds">
+                            <div class="fields">
+                                <input class="input is-medium" type="text" placeholder="Enter Your URL here" name="original_url" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <div class="buttons" style="justify-content: center;"><button type="submit" class="button is-medium input is-red-" >Shorten</button></div>
                     </div>
                 </div>
-            </div>
-            <div class="column is-one-fifth">
-                <div class="buttons" style="justify-content: center;"><button type="submit" class="button is-medium input is-red-" >Shorten</button></div>
-            </div>
+            </form>
         </div>
-    </form>
+    </div>
 </section>
 
 {% if short_url %}
@@ -43,9 +47,7 @@
     custom_link.addEventListener('click', function(){
         console.log('clicked');
     })
-
 </script>
 {% endif %}
-
 
 {% endblock body %}
