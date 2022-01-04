@@ -1,8 +1,1 @@
-Working:
-Homepage Loading
-Register Page Loading
-Login Page Loading
-
-Not Working:
-
-
+- Migrate from sqlite3 to postgres
