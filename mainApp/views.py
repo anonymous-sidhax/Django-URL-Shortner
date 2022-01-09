@@ -12,8 +12,8 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 import os
 
-#HOST = 'https://duspy.herokuapp.com/'
-HOST = 'http://127.0.0.1:8000/'
+HOST = 'https://duspy.herokuapp.com/'
+#HOST = 'http://127.0.0.1:8000/'
 USED_FOR_MAPPING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
 def get_url():
