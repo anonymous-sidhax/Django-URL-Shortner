@@ -1,21 +1,17 @@
 [[source]]
-url = "https://pypi.python.org/simple"
+url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
 [packages]
-asgiref = "==3.2.10"
-django = "*"
-django-widget-tweaks = "*"
-gunicorn = "==20.0.4"
-pytz = "==2020.1"
-sqlparse = "==0.4.1"
-whitenoise = "==5.2.0"
-geoip2 = "==0.1.0"
+gunicorn = "*"
+whitenoise = "*"
+geoip2 = "*"
 django-heroku = "*"
+django = "*"
 psycopg2 = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"
