@@ -52,11 +52,11 @@ def redirection(request, url):
         if(check.expire_flag == 0 or datetime.now() < check.expiration_date):
             check.visits += 1
             check.save()
-            dashboard_logging(request)
+            #dashboard_logging(request)
 
             return HttpResponseRedirect(check.original_url)
         else:
-            check.expire_flag = True
+            check.expire_flag = 1
             return render(request, 'expired.html')
     except ShortenUrl.DoesNotExist:
         messages.error(request, "The URL you are trying to reach has been expired or it is not yet created.")
@@ -134,9 +134,11 @@ def shorten(request):
     if request.method == "POST":
         if request.POST['original_url']:
             original = request.POST['original_url']
-            org_url = ShortenUrl.objects.filter(original_url=original).exists()
+            org_url = ShortenUrl.objects.filter(id = 15, original_url=original).exists()
             if org_url:
                 url = ShortenUrl.objects.get(original_url=original)
+                url.expiration_date = datetime.now() + timedelta(days=7)
+                url.save()
                 context = {
                     "short_url":url,
                 }
