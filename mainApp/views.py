@@ -67,38 +67,43 @@ def shorten_for_logged_in_users(request):
     if request.method == "POST":
         if request.POST['original_url'] and request.POST['custom_url']:
             original = request.POST['original_url']
-            org_url = ShortenUrl.objects.filter(original_url=original).exists()
-            if org_url:
-                url = ShortenUrl.objects.get(original_url=original)
+            # org_url = ShortenUrl.objects.filter(user_id = request.user.id , original_url=original).exists()
+            # if org_url:
+            #     url = ShortenUrl.objects.get(user_id = request.user.id, original_url=original)
+            #     if url.expiration_date < datetime.now() or url.expire_flag == 1:
+            #         url.expiration_date = datetime.now() + timedelta(days=7)
+            #         url.expire_flag = 0
+            #         url.save()
+            #     context = {
+            #         "short_url":url,
+            #     }
+            #     messages.error(request, "Short URL already exists. Please use the below URL.")
+            #     return render(request, 'dashboard.html', context)
+            # else:
+            original = request.POST['original_url']
+            expiry_days = request.POST['expire_days']
+            custom_url = request.POST['custom_url']
+            if not expiry_days:
+                expiry_days = 7
+
+            short = HOST + str(request.POST['custom_url'])
+            check = ShortenUrl.objects.filter(short_url=short)
+            if not check:
+                newurl = ShortenUrl(
+                    original_url=original,
+                    short_url=short,
+                    user=request.user.id,
+                    creation_date=datetime.now(),
+                    expiration_date=datetime.now() + timedelta(days=expiry_days)
+                )
+                newurl.save()
                 context = {
-                    "short_url":url,
+                    "short_url":short,
                 }
-                messages.error(request, "Short URL already exists. Please use the below URL.")
                 return render(request, 'dashboard.html', context)
             else:
-                original = request.POST['original_url']
-                expiry_days = request.POST['expire_days']
-                if not expiry_days:
-                    expiry_days = 7
-
-                short = HOST + str(request.POST['custom_url'])
-                check = ShortenUrl.objects.filter(short_url=short)
-                if not check:
-                    newurl = ShortenUrl(
-                        original_url=original,
-                        short_url=short,
-                        user=request.user,
-                        creation_date=datetime.now(),
-                        expiration_date=datetime.now() + timedelta(days=expiry_days)
-                    )
-                    newurl.save()
-                    context = {
-                        "short_url":short,
-                    }
-                    return render(request, 'dashboard.html', context)
-                else:
-                    messages.error(request, "Custom URL already exists. Please use a different path.")
-                    return render(request, 'dashboard.html.html', { 'error' : 'Custom URL already exists'})
+                messages.error(request, "Custom URL already exists. Please use a different path.")
+                return render(request, 'dashboard.html', { 'error' : 'Custom URL already exists'})
         elif request.POST['original_url']:
             original = request.POST['original_url']
             expiry_days = request.POST['expire_days']
@@ -106,7 +111,11 @@ def shorten_for_logged_in_users(request):
                 expiry_days = 7
             org_url = ShortenUrl.objects.filter(original_url=original).exists()
             if org_url:
-                url = ShortenUrl.objects.get(original_url=original)
+                url = ShortenUrl.objects.get(user_id = request.user.id, original_url=original)
+                if url.expiration_date < datetime.now() or url.expire_flag == 1:
+                    url.expiration_date = datetime.now() + timedelta(days=7)
+                    url.expire_flag = 0
+                    url.save()
                 context = {
                     "short_url":url,
                 }
@@ -117,7 +126,7 @@ def shorten_for_logged_in_users(request):
                 print (short)
                 print (HOST)
                 key.delete()
-                newurl = ShortenUrl(original_url=original, short_url=short, user=request.user, creation_date=datetime.now(), expiration_date=(datetime.now() + timedelta(days=int(expiry_days))))
+                newurl = ShortenUrl(user_id = request.user.id, original_url=original, short_url=short, user=request.user, creation_date=datetime.now(), expiration_date=(datetime.now() + timedelta(days=int(expiry_days))))
                 newurl.save()
                 context = {
                     "short_url":short,
@@ -136,9 +145,11 @@ def shorten(request):
             original = request.POST['original_url']
             org_url = ShortenUrl.objects.filter(user_id = 15, original_url=original).exists()
             if org_url:
-                url = ShortenUrl.objects.get(original_url=original)
-                url.expiration_date = datetime.now() + timedelta(days=7)
-                url.save()
+                url = ShortenUrl.objects.get(user_id = 15, original_url=original)
+                if url.expiration_date < datetime.now() or url.expire_flag == 1:
+                    url.expiration_date = datetime.now() + timedelta(days=7)
+                    url.expire_flag = 0
+                    url.save()
                 context = {
                     "short_url":url,
                 }
@@ -147,7 +158,7 @@ def shorten(request):
                 key = Keys.objects.last()
                 short = HOST + key.key
                 key.delete()
-                newurl = ShortenUrl(original_url=original, short_url=short, creation_date=datetime.now(), expiration_date=datetime.now() + timedelta(days=7))
+                newurl = ShortenUrl(user_id = 15, original_url=original, short_url=short, creation_date=datetime.now(), expiration_date=datetime.now() + timedelta(days=7))
                 newurl.save()
                 context = {
                     "short_url":short,
