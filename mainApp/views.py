@@ -1,16 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Keys, ShortenUrl, ContactUs, DashboardStats
-from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib import auth
 from .forms import ContactUsForm
-import accounts.urls
-import random
-import string
 from django.utils import timezone
 from datetime import datetime, timedelta
-import os
 
 HOST = 'https://duspy.herokuapp.com/'
 #HOST = 'http://127.0.0.1:8000/'
@@ -49,7 +43,7 @@ def redirection(request, url):
     try:
         check = ShortenUrl.objects.get(short_url=short_url)
         print(check)
-        if(check.expire_flag == 0 or datetime.now() < check.expiration_date):
+        if(check.expire_flag == 0 or timezone.now() < check.expiration_date):
             check.visits += 1
             check.save()
             #dashboard_logging(request)
@@ -112,7 +106,7 @@ def shorten_for_logged_in_users(request):
             org_url = ShortenUrl.objects.filter(original_url=original).exists()
             if org_url:
                 url = ShortenUrl.objects.get(user_id = request.user.id, original_url=original)
-                if url.expiration_date < datetime.now() or url.expire_flag == 1:
+                if url.expiration_date < timezone.now() or url.expire_flag == 1:
                     url.expiration_date = datetime.now() + timedelta(days=7)
                     url.expire_flag = 0
                     url.save()
@@ -146,7 +140,7 @@ def shorten(request):
             org_url = ShortenUrl.objects.filter(user_id = 15, original_url=original).exists()
             if org_url:
                 url = ShortenUrl.objects.get(user_id = 15, original_url=original)
-                if url.expiration_date < datetime.now() or url.expire_flag == 1:
+                if url.expiration_date < timezone.now() or url.expire_flag == 1:
                     url.expiration_date = datetime.now() + timedelta(days=7)
                     url.expire_flag = 0
                     url.save()
