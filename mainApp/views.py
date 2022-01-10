@@ -134,7 +134,7 @@ def shorten(request):
     if request.method == "POST":
         if request.POST['original_url']:
             original = request.POST['original_url']
-            org_url = ShortenUrl.objects.filter(id = 15, original_url=original).exists()
+            org_url = ShortenUrl.objects.filter(user_id = 15, original_url=original).exists()
             if org_url:
                 url = ShortenUrl.objects.get(original_url=original)
                 url.expiration_date = datetime.now() + timedelta(days=7)
