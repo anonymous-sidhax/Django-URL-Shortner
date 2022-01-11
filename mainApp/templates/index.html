@@ -3,10 +3,10 @@
 {% block title %} Home {% endblock title %} 
 {% block body %} {% load static %}
 
-<main class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+<main class="md:max-w-7xl max-w-full mx-4 sm:mx-auto px-2 sm:px-6 lg:px-8">
   <div class="flex w-full m:flex-wrap">
     <div
-      class="flex mx-auto xl:mx-0 xl:text-left text-center flex-wrap w-1/2 justify-center"
+      class="flex mx-auto xl:mx-0 xl:text-left text-center flex-wrap md:w-1/2 w-full justify-center"
     >
       <h1 class="text-gray-900 mt-36 text-4xl xl:text-7xl font-bold leading-10">
         More than just shorter links
@@ -18,49 +18,39 @@
     </div>
     
   </div>
-  <section class="container mt-4" id="short_section">
-    <div class="row justify-content-center">
-        <div class="col-4">
-            <form action="short" method="POST" id="form">
-                {% csrf_token  %}
-                <div class="conatiner">
-                    <div class="columns is-variable is-centered">
-                        <div class="column is-one-thirds">
-                            <div class="fields">
-                                <input class="input is-medium" type="text" placeholder="Enter Your URL here" name="original_url" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-one-fifth">
-                        <div class="buttons" style="justify-content: center;"><button type="submit" class="button is-medium input is-red-" >Shorten</button></div>
-                    </div>
-                </div>
-            </form>
+
+  <div class="flex w-full m:flex-wrap mt-10">
+    <div class="flex mx-auto md:w-1/2 w-full xl:w-full">
+        <form action="short" method="post" id="form" class="xl:w-1/3 w-full flex items-center">
+            {% csrf_token  %}
+            <input placeholder="Enter your URL here" class="placeholder:text-sm text-gray-500 placeholder:text-gray-400 block bg-white border-gray-300 w-full border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4  focus:ring-1 shadow-sm " type="text" name="original_url" required>
+            <button type="submit" class="mx-2 bg-slate-800 text-white py-2 px-4 rounded-md" >Shorten</button>
+        </form>
+    </div>
+  </div> 
+  {% if short_url %}
+  <!-- short_url -->
+  <div class="flex w-full m:flex-wrap mt-4">
+      <div class="flex mx-auto w-1/2 xl:w-full">
+        <input
+          type="text"
+          class="px-2 w-auto text-gray-500 border rounded-md focus:outline-none disabled:bg-gray-50"
+          value="{{ short_url }}"
+          id="shorted_url"
+          readonly
+        />
+        <div class="is-pulled-right">
+          <button
+            class="rounded-md py-1 px-3 bg-violet-900 text-white mx-2"
+            onclick="copyUrl()"
+          >
+            Copy
+          </button>
         </div>
-    </div>
-</section>
- 
-</main>
-<div class="container mt-4">
-    <div class="notification is-primary">
-      Your Short Url :
-      <input
-        type="text"
-        class="input is-small"
-        style="width: 50%; background: transparent; color: white; border: none"
-        value="{{ short_url }}"
-        id="shorted_url"
-      />
-      <div class="is-pulled-right">
-        <button
-          class="button is-small is-outlined is-rounded"
-          onclick="copyUrl()"
-        >
-          Copy
-        </button>
       </div>
-    </div>
   </div>
+  {% endif %}
+</main>
 <script>
   function copyUrl() {
     holdText = document.getElementById("shorted_url");
