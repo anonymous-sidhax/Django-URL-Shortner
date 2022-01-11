@@ -1,10 +1,24 @@
-{% extends 'base.html' %}
-{% block title %} Home {% endblock title %}
-{% block body %}
+{% extends 'base.html' %} 
 {% load static %}
+{% block title %} Home {% endblock title %} 
+{% block body %} {% load static %}
 
-
-<section class="container mt-4" id="short_section">
+<main class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+  <div class="flex w-full m:flex-wrap">
+    <div
+      class="flex mx-auto xl:mx-0 xl:text-left text-center flex-wrap w-1/2 justify-center"
+    >
+      <h1 class="text-gray-900 mt-36 text-4xl xl:text-7xl font-bold leading-10">
+        More than just shorter links
+      </h1>
+      <p class="mt-3">
+        Build your brand’s recognition and get detailed insights on how your
+        links are performing.
+      </p>
+    </div>
+    
+  </div>
+  <section class="container mt-4" id="short_section">
     <div class="row justify-content-center">
         <div class="col-4">
             <form action="short" method="POST" id="form">
@@ -25,29 +39,40 @@
         </div>
     </div>
 </section>
-
-{% if short_url %}
+ 
+</main>
 <div class="container mt-4">
-  <div class="notification is-primary">
-    Your Short Url : <input type="text" class="input is-small" style="width: 50%; background: transparent; color: white; border: none;" value="{{ short_url }}" id="shorted_url"> 
-    <div class="is-pulled-right">
-        <button class="button is-small is-outlined is-rounded" onclick="copyUrl()">Copy</button>
+    <div class="notification is-primary">
+      Your Short Url :
+      <input
+        type="text"
+        class="input is-small"
+        style="width: 50%; background: transparent; color: white; border: none"
+        value="{{ short_url }}"
+        id="shorted_url"
+      />
+      <div class="is-pulled-right">
+        <button
+          class="button is-small is-outlined is-rounded"
+          onclick="copyUrl()"
+        >
+          Copy
+        </button>
+      </div>
     </div>
   </div>
-</div>
 <script>
-    function copyUrl(){
-        holdText = document.getElementById("shorted_url");
-        textToCopy = holdText.value;
-        navigator.clipboard.writeText(textToCopy);
-        alert("Copied Url : " + textToCopy);
-    }
-    var custom_link = document.querySelector('.custom-link');
-    let menu_ = document.querySelector('#menu');
-    custom_link.addEventListener('click', function(){
-        console.log('clicked');
-    })
+  function copyUrl() {
+    holdText = document.getElementById("shorted_url");
+    textToCopy = holdText.value;
+    navigator.clipboard.writeText(textToCopy);
+    alert("Copied Url : " + textToCopy);
+  }
+  var custom_link = document.querySelector(".custom-link");
+  let menu_ = document.querySelector("#menu");
+  custom_link.addEventListener("click", function () {
+    console.log("clicked");
+  });
 </script>
-{% endif %}
 
 {% endblock body %}
