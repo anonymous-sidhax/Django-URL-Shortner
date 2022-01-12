@@ -76,13 +76,21 @@
           </button>
         </div>
         <div class="flex-shrink-0 flex items-center">
-          <h1 class="hidden sm:block lg:block text-3xl text-white">Shortner</h1>
+          <h1 class="hidden sm:block lg:block text-3xl text-white"><a href="{% url 'home' %}">Shortner</a></h1>
+          <a href="{% url 'aboutus' %}" class="hidden sm:block ml-10 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About us</a>
+          <a href="{% url 'contactus' %}" class="hidden sm:block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact us</a>
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-end">
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
+              {% if not user.is_authenticated %}
               <a href="{% url 'accounts:login' %}" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Login</a>
               <a href="{% url 'accounts:signup' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Signup</a>
+              {% else %}
+              <p class="text-white px-3 py-2 text-sm font-medium">Welcome, {{request.user.username}}</p>
+              {% endif %}
+
+              
             </div>
           </div>
         </div>
@@ -93,9 +101,13 @@
     </div>
     <div class="sm:hidden" id="mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="{% url 'aboutus' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">About us</a>
+        <a href="{% url 'contactus' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">Contact us</a>
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        {% if not user.is_authenticated %}
         <a href="{% url 'accounts:login' %}" class="text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Login</a>  
         <a href="{% url 'accounts:signup' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Signup</a>
+        {% endif %}
       </div>
   </nav>
 
@@ -107,9 +119,9 @@
 
 
 
-<footer class="absolute bottom-0 py-2 text-white bg-gray-700 w-full text-center">
+<!-- <footer class="absolute bottom-0 py-2 text-white bg-gray-700 w-full text-center">
   <p>Copyright &copy;<strong> DUS</strong></p>
-</footer>
+</footer> -->
 
 </body>
 </html>

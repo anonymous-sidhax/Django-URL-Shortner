@@ -6,7 +6,7 @@ from .views import home, redirection, shorten, dashboard, contactus, aboutus, sh
 
 
 urlpatterns = [
-    path('', home, name="Homepage"),
+    path('', home, name="home"),
     path('short', shorten, name="Shorten URL"),
     path('dashboard/shorten', shorten_for_logged_in_users, name="Shorten URL for Logged In Users"),
     path('<str:url>', redirection, name="Redirection To Original Page"),
