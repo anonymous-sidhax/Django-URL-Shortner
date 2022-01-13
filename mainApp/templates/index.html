@@ -1,9 +1,12 @@
 {% extends 'base.html' %} 
-{% load static %}
+{% load static %} 
 {% block title %} Home {% endblock title %} 
-{% block body %} {% load static %}
+{% block body %} 
 
-<main class="md:max-w-7xl max-w-full mx-4 sm:mx-auto px-2 sm:px-6 lg:px-8">
+<main
+  class="md:max-w-7xl max-w-full mx-4 sm:mx-auto px-2 sm:px-6 lg:px-8"
+  style="min-height: 100vh"
+>
   <div class="flex w-full m:flex-wrap">
     <div
       class="h-max flex mx-auto xl:mx-0 xl:text-left text-center flex-wrap md:w-1/2 w-full justify-center"
@@ -17,43 +20,58 @@
       </p>
       <div class="flex w-full m:flex-wrap mt-10">
         <div class="flex mx-auto w-full xl:w-full">
-            <form action="short" method="post" id="form" class="w-full flex items-center">
-                {% csrf_token  %}
-                <input placeholder="Enter your URL here" class="placeholder:text-sm text-gray-500 placeholder:text-gray-400 block bg-white border-gray-300 w-full border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4  focus:ring-1 shadow-sm " type="text" name="original_url" required>
-                <button type="submit" class="mx-2 bg-slate-800 text-white py-2 px-4 rounded-md" >Shorten</button>
-            </form>
-        </div>
-      </div> 
-    </div>
-    <div class="hidden xl:block mt-36">
-      <img src="{% static 'assets/img/hero.svg' %}" alt="">
-    </div>
-    
-  </div>
-
-
-  {% if short_url %}
-  <!-- short_url -->
-  <div class="flex w-full m:flex-wrap mt-4">
-      <div class="flex mx-auto w-1/2 xl:w-full">
-        <input
-          type="text"
-          class="px-2 w-auto text-gray-500 border rounded-md focus:outline-none disabled:bg-gray-50"
-          value="{{ short_url }}"
-          id="shorted_url"
-          readonly
-        />
-        <div class="is-pulled-right">
-          <button
-            class="rounded-md py-1 px-3 bg-violet-900 text-white mx-2"
-            onclick="copyUrl()"
+          <form
+            action="short"
+            method="post"
+            id="form"
+            class="w-full items-center"
           >
-            Copy
-          </button>
+            {% csrf_token %}
+            <input
+              placeholder="Enter your URL here"
+              class="placeholder:text-sm text-gray-500 placeholder:text-gray-400 block bg-white border-gray-300 w-full border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4 focus:ring-1 shadow-sm"
+              type="text"
+              name="original_url"
+              required
+            />
+            <input class="mt-2 placeholder:text-sm text-gray-500 placeholder:text-gray-400  bg-white border-gray-300 border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4 focus:ring-1 shadow-sm" type="text" placeholder="Custom URL (If any)" name="custom_url">
+            <input class="mt-2 placeholder:text-sm text-gray-500 placeholder:text-gray-400  bg-white border-gray-300 border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4 focus:ring-1 shadow-sm" type="text" placeholder="Expiry Days (Default will be 7)" name="expire_days">
+            <button
+              type="submit"
+              class="xl:mx-2 mt-2  bg-slate-800 text-white py-2 px-4 rounded-md"
+            >
+              Shorten
+            </button>
+          </form>
         </div>
       </div>
+      {% if short_url %}
+      <!-- short_url -->
+      <div class="flex w-full m:flex-wrap mt-4">
+        <div class="flex mx-auto w-1/2 xl:w-full">
+          <input
+            type="text"
+            class="px-2 w-auto text-gray-500 border rounded-md focus:outline-none disabled:bg-gray-50"
+            value="{{ short_url }}"
+            id="shorted_url"
+            readonly
+          />
+          <div class="is-pulled-right">
+            <button
+              class="rounded-md py-1 px-3 bg-violet-900 text-white mx-2"
+              onclick="copyUrl()"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="hidden xl:block mt-36">
+      <img src="{% static 'assets/img/hero.svg' %}" alt="" />
+    </div>
   </div>
-  {% endif %}
 </main>
 <script>
   function copyUrl() {
