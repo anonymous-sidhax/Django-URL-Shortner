@@ -24,7 +24,7 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "Logout successful")
-    return redirect('Homepage')
+    return redirect('home')
 
 def login_view(request):
     if not request.user.is_authenticated: # If you are logged in then it will stop logging in again
@@ -43,7 +43,7 @@ def login_view(request):
                         return HttpResponseRedirect(redirection_url)
                     else:
                         messages.success(request, f"Logged in successfully as {username}")
-                        return redirect('Homepage')
+                        return redirect('home')
                 else:
                     messages.error(request, "User Doesn't Exists.")
                     return render(request, "registration/login.html", {'form':form})
@@ -52,4 +52,4 @@ def login_view(request):
         return render(request, "registration/login.html", {'form':form})
     else:
         messages.info(request, "You are already logged in")
-        return redirect('Homepage')
+        return redirect('home')
