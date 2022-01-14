@@ -1,141 +1,125 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title> DUS - {% block title %} {% endblock title%}</title>   
+    <title> DUS - {% block title %} {% endblock title%}</title>
+    <link rel="stylesheet" href="{% static 'assets/css/jstools/homepage-output.css' %}">
 </head>
 <body>
    
   {% if messages %}
   {% for message in messages %}
   {% if  message.tags == 'success' %}
-  <article class="message is-success">
-    <div class="message-header">
-      <p>{{ message }}</p>
-      
-      <button class="delete" aria-label="delete"></button>
-    </div>
-  </article>
+  <div class="bg-teal-100 border border-teal-400 text-teal-900 px-4 py-3 rounded relative" role="alert">
+    <span class="block sm:inline">{{message}}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <svg class="fill-current h-6 w-6 text-teal-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    </span>
+  </div>
   {% elif message.tags == 'error' %}
-  <article class="message is-danger">
-    <div class="message-header">
-      <p>{{ message }}</p>
-      
-      <button class="delete" aria-label="delete"></button>
-    </div>
-  </article>
+  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <span class="block sm:inline">{{message}}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    </span>
+  </div>
   {% elif message.tags == 'info' %}
-  <article class="message is-info">
-    <div class="message-header">
-      <p>{{ message }}</p>
-      
-      <button class="delete" aria-label="delete"></button>
-    </div>
-  </article>
+  <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+    <span class="block sm:inline">{{message}}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <svg class="fill-current h-6 w-6 text-blue-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    </span>
+  </div>
   {% elif message.tags == 'warning' %}
-  <article class="message is-warning">
-    <div class="message-header">
-      <p>{{ message }}</p>
-      <button class="delete" aria-label="delete"></button>
-    </div>
-  </article>
+  <div class="bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+    <span class="block sm:inline">{{message}}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <svg class="fill-current h-6 w-6 text-orange-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    </span>
+  </div>
   {% endif %}
   {% endfor %}
   {% endif %}
 
+  <nav class="bg-gray-800">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-center sm:justify-between h-14">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <!--
+              Icon when menu is closed.
+  
+              Heroicon name: outline/menu
+  
+              Menu open: "hidden", Menu closed: "block"
+            -->
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <!--
+              Icon when menu is open.
+  
+              Heroicon name: outline/x
+  
+              Menu open: "block", Menu closed: "hidden"
+            -->
+            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex-shrink-0 flex items-center">
+          <h1 class="hidden sm:block lg:block text-3xl text-white"><a href="{% url 'home' %}">Shortner</a></h1>
+          <a href="{% url 'aboutus' %}" class="hidden sm:block ml-10 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About us</a>
+          <a href="{% url 'contactus' %}" class="hidden sm:block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact us</a>
+        </div>
+        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-end">
+          <div class="hidden sm:block sm:ml-6">
+            <div class="flex space-x-4">
+              {% if not user.is_authenticated %}
+              <a href="{% url 'accounts:login' %}" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Login</a>
+              <a href="{% url 'accounts:signup' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Signup</a>
+              {% else %}
+              <p class="text-white px-3 py-2 text-sm font-medium">Welcome, {{request.user.username}}</p>
+              <a href="{% url 'accounts:logout' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+              {% endif %}
 
-
-  
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-      </a>
-  
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-  
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-
-        <a class="navbar-item">
-          Why DUS?
-        </a>
-
-        <a class="navbar-item" href="{% url 'DUS Dashboard' %}">
-          Dashboard
-        </a>
-  
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More
-          </a>
-  
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="{% url 'aboutus' %}">
-              About
-            </a>
-            <a class="navbar-item">
-              Jobs
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item" href="{% url 'contactus' %}">
-              Contact Support
-            </a>
+              
+            </div>
           </div>
         </div>
-      </div>
-  
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            {% if not user.is_authenticated %}
-            <a class="button is-danger" href="{% url 'accounts:signup' %}">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light" href="{% url 'accounts:login' %}">
-              Log in
-            </a>
-            {% else %}
-            <p class="mr-2 is-size-6" >Welcome <strong>{{ request.user }}</strong></p>
-            <a href="{% url 'accounts:logout' %}" class="button is-danger">Logout</a>
-            {% endif %}
-          </div>
+        <div class="sm:hidden absolute" id="mobile-logo">
+              <a href="#"><h1 class="text-3xl text-white">Shortner</h1></a>
         </div>
       </div>
     </div>
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="{% url 'aboutus' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">About us</a>
+        <a href="{% url 'contactus' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">Contact us</a>
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        {% if not user.is_authenticated %}
+        <a href="{% url 'accounts:login' %}" class="text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Login</a>  
+        <a href="{% url 'accounts:signup' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Signup</a>
+        {% endif %}
+      </div>
   </nav>
-
 
 {% block body %}
 
 
+
 {% endblock body %}
 
-<footer class="footer my-5">
-  <div class="content has-text-centered">
-    <p>
-      Copyright &copy;<strong> DUS</strong>
-    </p>
-  </div>
+
+
+<footer class="py-2 text-white bg-gray-700 w-full text-center clear-both relative">
+  <p>Copyright &copy;<strong> DUS</strong></p>
 </footer>
-
-<script>
-  const message = document.querySelector('.message');
-  const delete_button = document.querySelector('.delete');
-
-  delete_button.addEventListener('click', ()=> {
-    message.classList.add('is-hidden');
-  })
-
-</script>
 
 </body>
 </html>
