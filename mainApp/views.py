@@ -96,10 +96,10 @@ def shorten_for_logged_in_users(request):
                 context = {
                     "short_url":short,
                 }
-                return render(request, 'dashboard.html', context)
+                return render(request, 'index.html', context)
             else:
                 messages.error(request, "Custom URL already exists. Please use a different path.")
-                return render(request, 'dashboard.html', { 'error' : 'Custom URL already exists'})
+                return render(request, 'index.html', { 'error' : 'Custom URL already exists'})
         elif request.POST['original_url']:
             original = request.POST['original_url']
             expiry_days = request.POST['expire_days']
@@ -115,7 +115,7 @@ def shorten_for_logged_in_users(request):
                 context = {
                     "short_url":url,
                 }
-                return render(request, 'dashboard.html', context)
+                return render(request, 'index.html', context)
             else:
                 key = Keys.objects.last()
                 short = HOST + key.key
@@ -128,7 +128,7 @@ def shorten_for_logged_in_users(request):
                     "short_url":short,
                 }
                 messages.success(request, "URL created successfully. Check below")
-                return render(request, 'dashboard.html', context)
+                return render(request, 'index.html', context)
         else:
             messages.error(request, "Empty Field")
             return redirect('')
