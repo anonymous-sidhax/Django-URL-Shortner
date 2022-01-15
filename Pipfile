@@ -10,6 +10,7 @@ geoip2 = "*"
 django-heroku = "*"
 django = "*"
 psycopg2 = "*"
+django-widget-tweaks = "*"
 
 [dev-packages]
 
