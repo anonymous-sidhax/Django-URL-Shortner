@@ -20,12 +20,22 @@
       </p>
       <div class="flex w-full m:flex-wrap mt-10">
         <div class="flex mx-auto w-full xl:w-full">
+          {% if user.is_authenticated %}
+          <form
+            action="dashboard/shorten"
+            method="post"
+            id="form"
+            class="w-full items-center"
+          >
+          {% else %}
+
           <form
             action="short"
             method="post"
             id="form"
             class="w-full items-center"
           >
+          {% endif %}
             {% csrf_token %}
             <input
               placeholder="Enter your URL here"
@@ -34,8 +44,10 @@
               name="original_url"
               required
             />
-            <input class="mt-2 placeholder:text-sm text-gray-500 placeholder:text-gray-400  bg-white border-gray-300 border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4 focus:ring-1 shadow-sm" type="text" placeholder="Custom URL (If any)" name="custom_url">
-            <input class="mt-2 placeholder:text-sm text-gray-500 placeholder:text-gray-400  bg-white border-gray-300 border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4 focus:ring-1 shadow-sm" type="text" placeholder="Expiry Days (Default will be 7)" name="expire_days">
+            {% if user.is_authenticated %}
+              <input class="mt-2 placeholder:text-sm text-gray-500 placeholder:text-gray-400  bg-white border-gray-300 border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4 focus:ring-1 shadow-sm" type="text" placeholder="Custom URL (If any)" name="custom_url">
+              <input class="mt-2 placeholder:text-sm text-gray-500 placeholder:text-gray-400  bg-white border-gray-300 border rounded-md focus:outline-none focus:ring-sky-700 pl-1 py-2 px-4 focus:ring-1 shadow-sm" type="text" placeholder="Expiry Days (Default will be 7)" name="expire_days">
+            {% endif %}
             <button
               type="submit"
               class="xl:mx-2 mt-2  bg-slate-800 text-white py-2 px-4 rounded-md"

@@ -58,6 +58,8 @@ def redirection(request, url):
 
 @login_required(login_url='/accounts/login/')
 def shorten_for_logged_in_users(request):
+    print (request.POST['original_url']) 
+    print (request.POST['custom_url'])
     if request.method == "POST":
         if request.POST['original_url'] and request.POST['custom_url']:
             original = request.POST['original_url']
@@ -86,7 +88,7 @@ def shorten_for_logged_in_users(request):
                 newurl = ShortenUrl(
                     original_url=original,
                     short_url=short,
-                    user=request.user.id,
+                    user_id=request.user.id,
                     creation_date=datetime.now(),
                     expiration_date=datetime.now() + timedelta(days=expiry_days)
                 )
@@ -103,7 +105,7 @@ def shorten_for_logged_in_users(request):
             expiry_days = request.POST['expire_days']
             if not expiry_days:
                 expiry_days = 7
-            org_url = ShortenUrl.objects.filter(original_url=original).exists()
+            org_url = ShortenUrl.objects.filter(user_id = request.user.id, original_url=original).exists()
             if org_url:
                 url = ShortenUrl.objects.get(user_id = request.user.id, original_url=original)
                 if url.expiration_date < timezone.now() or url.expire_flag == 1:
