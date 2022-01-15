@@ -1,67 +1,76 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
-{% block title %} LogIn{% endblock title %}
+{% block title %} LogIn {% endblock title %}
 {% load static %}
 {% block body %}
 
-<style>
-    .errorlist{
-        color: #f14668;
-    }
-</style>
-<section class="section">
-    <div class="container">
-        <div class="columns  is-centered is-gapless">
-            <div class="column is-half is-hidden-mobile">
-                <div class="card " style="height: 100%; width: 100%;">
-                  <div class="card-image" style="background-image: url({% static 'assets/img/3418100.jpg' %});width: 100%; height: 100%;"></div>
-                </div>
-            </div>
-            <div class="column is-two-fifths">
-                <div class="card">
-                    <div class="card-content has-text-centered">
-                        <h3 class="is-size-3 " style="letter-spacing: 4px;">LOGIN</h3>
-                    </div>
-                    <div class="card-content">
-                        <form action="{% url 'accounts:login' %}" method="POST" novalidate>
-                            {% csrf_token  %}
-                            <div class="field">
-                                <label class="label" style="font-weight: 500;">Username</label>
-                                <div class="control has-icons-left has-icons-right">
-                                    {% render_field form.username class="input" placeholder="Username"  %}
-                                  <span class="icon is-small is-left">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                  </span>
-                                </div>
-                              <p class="help is-danger">
-                                {{form.errors.username}}
-                                {{form.non_field_errors}}
-                                
-                              </p>
-                            </div>
-                            
-                            <div class="field">
-                                <label class="label" style="font-weight: 500;">Password</label>
-                                <div class="control">
-                                    {% render_field form.password class="input" placeholder="Password"  %}
-                            </div>
-                            <p class="help is-danger">
-                                {{form.errors.password}}
-                            </p>
-                            </div>
-                            <input type = "hidden" name = "next" value = "{{ request.GET.next }}"/>
-                            <div class="field">
-                                <div class="control"><button class="button input" type="submit">Login</button></div>
-                            </div>    
-                            <p>Did not have an account ?<a class="card-link" href="{% url 'accounts:signup' %}">SignUp</a></p>                                
-                 
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-        
+<!-- component -->
+<div class="bg-grey-lighter min-h-screen flex flex-col">
+  <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+    <form action="{% url 'accounts:login' %}" method="POST" novalidate class="bg-white px-6 py-8 rounded shadow-lg text-black w-full">
+          <h1 class="mb-8 text-3xl text-center">Login</h1>
+          {% csrf_token  %}
+          
+            {% if form.errors %}
+              <input class="block border border-red-500 w-full p-3 rounded" 
+                    type="text"
+                    name="username" 
+                    autofocus="" 
+                    autocapitalize="none" 
+                    autocomplete="username" 
+                    maxlength="150" 
+                    placeholder="Username" 
+                    required="" 
+                    id="id_username" />
+                    <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 mb-4">
+                      {{form.errors.username}}
+                      {{form.non_field_errors}}
+                    </span>
+              {% else %} 
+                <input class="block border border-gray-400 w-full p-3 rounded mb-4" 
+                  type="text"
+                  name="username" 
+                  autofocus="" 
+                  autocapitalize="none" 
+                  autocomplete="username" 
+                  maxlength="150" 
+                  placeholder="Username" 
+                  required="" 
+                  id="id_username" />
+            {% endif %}
+          
+          {% if form.errors %}
+          <input 
+              type="password"
+              class="block border border-red-500 w-full p-3 rounded"
+              name="password" 
+              autocomplete="current-password" 
+              placeholder="Password" 
+              required=""
+              id="id_password" />
+              <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 mb-4">
+                {{form.errors.password}}
+              </span>
+          {% else %} 
+          <input 
+              type="password"
+              class="block border border-gray-400 w-full p-3 rounded mb-4"
+              name="password" 
+              autocomplete="current-password" 
+              placeholder="Password" 
+              required=""
+              id="id_password" />
+          {% endif %}
+          <button
+              type="submit"
+              class="w-full text-center py-3 rounded bg-slate-900 text-white hover:bg-slate-800 focus:outline-none my-1"
+          >Login</button>
+    </form>
+      <div class="text-grey-dark mt-6">
+          Don't have an account? 
+          <a class="no-underline border-b border-blue text-blue" href="{% url 'accounts:signup' %}">
+              SignUp
+          </a>
+      </div>
+  </div>
+</div>
 {% endblock body %}
