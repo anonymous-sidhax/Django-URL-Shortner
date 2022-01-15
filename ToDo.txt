@@ -1,0 +1,8 @@
+Checks Already added in Backend:
+- Textfield for custom url field: custom_url. (Only for logged in users)
+- Textfield for Expiry of the URL in Days: expire_days. (Only for logged in users)
+- 
+
+Need changes in backend as well:
+- Custom URL Flag Column in DB. (Only for logged in users)
+- Number of visits per URL. (Only for logged in users)

@@ -77,15 +77,12 @@ def shorten_for_logged_in_users(request):
             #     return render(request, 'dashboard.html', context)
             # else:
             original = request.POST['original_url']
-            expiry_days = int (request.POST['expire_days'])
+            expiry_days = request.POST['expire_days']
             custom_url = request.POST['custom_url']
-            print(original)
-            print(custom_url)
-            print(expiry_days)
             if not expiry_days:
                 expiry_days = 7
 
-            short = HOST + str(custom_url)
+            short = HOST + str(request.POST['custom_url'])
             check = ShortenUrl.objects.filter(short_url=short)
             if not check:
                 newurl = ShortenUrl(
