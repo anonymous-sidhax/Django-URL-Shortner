@@ -14,42 +14,42 @@
        
             <!-- Username -->
             {% if form.username.errors %} 
-            <input class="block border border-gray-400 w-full p-3 rounded" type="text" name="username" maxlength="150" autofocus="" placeholder="Username" class="input" required="" id="id_username">
+            <input class="block border border-red-500 w-full p-3 rounded" type="text" name="username" maxlength="150" autofocus="" placeholder="Username" required="" id="id_username">
             <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 mb-4">
                 {{ form.username.errors }}
             </span>
             {% else %}
-            <input class="block border border-gray-400 w-full p-3 rounded mb-4" type="text" name="username" maxlength="150" autofocus="" placeholder="Username" class="input" required="" id="id_username">
+            <input class="block border border-gray-400 w-full p-3 rounded mb-4" type="text" name="username" maxlength="150" autofocus="" placeholder="Username" required="" id="id_username">
             {% endif %}
 
             <!-- Email -->
             {% if form.email.errors %} 
-            <input class="block border border-gray-400 w-full p-3 rounded" type="email" name="email" placeholder="Email Address" class="input" required="" id="id_email">
+            <input class="block border border-red-500 w-full p-3 rounded" type="email" name="email" placeholder="Email Address" required="" id="id_email">
             <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 mb-4">
                 {{ form.email.errors }}
             </span>
             {% else %}
-            <input class="block border border-gray-400 w-full p-3 rounded mb-4" type="email" name="email" placeholder="Email Address" class="input" required="" id="id_email">
+            <input class="block border border-gray-400 w-full p-3 rounded mb-4" type="email" name="email" placeholder="Email Address" required="" id="id_email">
             {% endif %}
 
             <!-- Password -->
             {% if form.password1.errors %} 
-            <input  class="block border border-gray-400 w-full p-3 rounded" type="password" name="password1" autocomplete="new-password" placeholder="Password" class="input" required="" id="id_password1">
+            <input  class="block border border-red-500 w-full p-3 rounded" type="password" name="password1" placeholder="Password"  required="" id="id_password1">
             <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 mb-4">
                 {{ form.password1.errors }}
             </span>
             {% else %}
-            <input  class="block border border-gray-400 w-full p-3 rounded mb-4" type="password" name="password1" autocomplete="new-password" placeholder="Password" class="input" required="" id="id_password1">
+            <input  class="block border border-gray-400 w-full p-3 rounded mb-4" type="password" name="password1" autocomplete="new-password" placeholder="Password"  required="" id="id_password1">
             {% endif %}
 
             <!-- Confirm Password -->
             {% if form.password2.errors %} 
-            <input  class="block border border-gray-400 w-full p-3 rounded" type="password" name="password1" autocomplete="new-password" placeholder="Password" class="input" required="" id="id_password1">
+            <input  class="block border border-red-500 w-full p-3 rounded" type="password" name="password2" placeholder="Password"  required="" id="id_password2">
             <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 mb-4">
                 {{ form.password2.errors }}
             </span>
             {% else %}
-            <input  class="block border border-gray-400 w-full p-3 rounded mb-4" type="password" name="password1" autocomplete="new-password" placeholder="Password" class="input" required="" id="id_password1">
+            <input  class="block border border-gray-400 w-full p-3 rounded mb-4" type="password" name="password2" placeholder="Confirm Password"  required="" id="id_password2">
             {% endif %}
             <button
                 type="submit"

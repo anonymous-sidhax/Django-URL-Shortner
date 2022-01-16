@@ -1,7 +1,12 @@
 module.exports = {
   content: ["../../../../**/*.html"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'anton': ["Anton", "sans-serif"],
+        'open_sans': ["Open Sans", "sans-serif"]
+      }
+    },
   },
   plugins: [],
 }

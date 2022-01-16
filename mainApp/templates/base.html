@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> DUS - {% block title %} {% endblock title%}</title>
     <link rel="stylesheet" href="{% static 'assets/css/jstools/homepage-output.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
    
@@ -43,12 +46,12 @@
   {% endfor %}
   {% endif %}
 
-  <nav class="bg-gray-800">
+  <nav class="bg-gray-800 font-open_sans">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-center sm:justify-between h-14">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
-          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <button id="hamburger-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <!--
               Icon when menu is closed.
@@ -74,8 +77,8 @@
         </div>
         <div class="flex-shrink-0 flex items-center">
           <h1 class="hidden sm:block lg:block text-3xl text-white"><a href="{% url 'home' %}">Shortner</a></h1>
-          <a href="{% url 'aboutus' %}" class="hidden sm:block ml-10 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About us</a>
-          <a href="{% url 'contactus' %}" class="hidden sm:block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact us</a>
+          <a href="#" class="hidden sm:block ml-10 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About us</a>
+          <a href="#" class="hidden sm:block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact us</a>
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-end">
           <div class="hidden sm:block sm:ml-6">
@@ -99,8 +102,8 @@
     </div>
     <div class="sm:hidden" id="mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <a href="{% url 'aboutus' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">About us</a>
-        <a href="{% url 'contactus' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">Contact us</a>
+        <a href="#" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">About us</a>
+        <a href="#" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">Contact us</a>
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         {% if not user.is_authenticated %}
         <a href="{% url 'accounts:login' %}" class="text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Login</a>  
@@ -115,20 +118,42 @@
 
 {% endblock body %}
 
+<footer class="py-2 text-white bg-gray-700 w-full flex font-open_sans">
+  <div class="w-full px-2 sm:px-6 lg:px-8 flex justify-between">
+  <p>2022 DUS.All Rights Reserved</p>
+  <div class="flex">
+    <ul class="flex">
+      <li class="mx-3"><a href="">Terms of service</a></li>
+      <li class="mx-2"><a href="">Privacy Policy</a></li>
+      <li class="mx-2"><a href="">Security</a></li>
+      <li class="mx-2"><a href="">Sitemap</a></li>
+    </ul>
+  </div>
 
-
-<footer class="py-2 text-white bg-gray-700 w-full text-center clear-both relative">
-  <p>Copyright &copy;<strong> DUS</strong></p>
+  </div>
 </footer>
 
 
 <script>
-  let message_close_button = document.getElementById("close-message");
-  if(message_close_button) {
-    message_close_button.addEventListener("click", function() {
-      document.getElementById("message").style.display = 'none';
-    });
-  };
+  function handleMessages() {
+    let message_close_button = document.getElementById("close-message");
+    if(message_close_button) {
+      message_close_button.addEventListener("click", function() {
+        document.getElementById("message").style.display = 'none';
+      });
+    };
+  }
+  function handleNavbar() {
+    let hamburger_btn  = document.querySelector("#hamburger-btn");
+    let mobile_menu  = document.querySelector("#mobile-menu");
+
+    hamburger_btn.addEventListener("click", () => {
+      mobile_menu.classList.toggle("hidden");
+    })
+  }
+
+  handleMessages();
+  handleNavbar();
 </script>
 
 </body>
