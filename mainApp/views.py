@@ -90,7 +90,7 @@ def shorten_for_logged_in_users(request):
                     short_url=short,
                     user_id=request.user.id,
                     creation_date=datetime.now(),
-                    expiration_date=datetime.now() + timedelta(days=expiry_days)
+                    expiration_date=datetime.now() + timedelta(days=int(expiry_days))
                 )
                 newurl.save()
                 context = {
